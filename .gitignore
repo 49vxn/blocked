@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.log
+.env
+captures/
+# viewer/ is local-only creative tooling (it hardcodes the staging assets path).
+viewer/
