@@ -1,6 +1,7 @@
 // client/main.ts — join, move, and see everyone in 3D.
-// Rendering is the voxel engine in client/engine (see client/render.ts); this file
-// owns the socket, the input intents and the HUD.
+// Rendering is the voxel engine in client/engine (see client/render.ts); motion is predicted
+// locally and interpolated for everyone else (client/net.ts). This file owns the socket,
+// the input intents and the HUD.
 import type { ArenaSnapshot, ClientMsg, PlayerState, ServerMsg } from "../shared/protocol";
 import {
 	BoxGeometry,
@@ -12,10 +13,9 @@ import {
 	MeshBasicMaterial,
 	Vector3,
 } from "three";
-import { moveBody, type Body } from "../shared/movement";
 import { buildWorld } from "./engine/arena";
 import { raycast } from "./engine/raycast";
-import type { World } from "./engine/world";
+import { LocalBody, RemotePlayers } from "./net";
 import { createVoxelRenderer, type VoxelRenderer } from "./render";
 
 const canvas = document.getElementById("c") as HTMLCanvasElement;
@@ -27,25 +27,21 @@ const statusEl = document.getElementById("status") as HTMLElement;
 let ws: WebSocket | null = null;
 let myId = "";
 let joined = false;
-let world: World | null = null;
+let world: ReturnType<typeof buildWorld> | null = null;
 let view: VoxelRenderer | null = null;
+let body: LocalBody | null = null;
 let players: PlayerState[] = [];
 let banner = "";
 let seq = 0;
 const keys = new Set<string>();
+const remote = new RemotePlayers();
 
-/** Mouse look; the server only cares about yaw (it drives movement direction). */
+/** Mouse look; yaw drives movement, so the camera and the body always agree. */
 let yaw = 0;
 let pitch = 0;
 let hasLooked = false; // until the player moves the mouse, the server's spawn facing wins
-/** Block placed by right click; 1-9 pick, wheel cycles. Advisory: the server owns the rule. */
+/** Block sent with a place; 1-9 pick, wheel cycles. Advisory: the server places wood today. */
 let selected = 3;
-
-// Local prediction: the server still owns the truth, but the camera runs on this body so
-// movement is smooth between the 10 Hz snapshots.
-let body: Body | null = null;
-let predAcc = 0;
-let lastFrameAt = performance.now();
 
 const send = (msg: ClientMsg) => ws?.send(JSON.stringify(msg));
 
@@ -63,6 +59,7 @@ function connect(): void {
 	ws.addEventListener("close", () => {
 		if (!joined) statusEl.textContent = "reconnecting…";
 		joined = false;
+		body = null;
 		setTimeout(connect, 1000);
 	});
 }
@@ -71,13 +68,8 @@ async function startView(arena: ArenaSnapshot): Promise<void> {
 	if (view) return;
 	world = buildWorld(arena);
 	view = await createVoxelRenderer(canvas, world);
-	const me = players.find((p) => p.id === myId);
-	if (me) {
-		yaw = me.yaw;
-		view.camera.position.set(me.x, me.y + 1.62, me.z);
-	}
+	view.camera.position.set(arena.size[0] / 2, 30, arena.size[2] + 12);
 	resize();
-	addEntities();
 }
 
 function handle(msg: ServerMsg): void {
@@ -93,28 +85,17 @@ function handle(msg: ServerMsg): void {
 	}
 	if (msg.t === "snapshot") {
 		players = msg.players;
-		const mine = msg.players.find((p) => p.id === myId);
-		if (mine) {
-			if (!body)
-				body = { x: mine.x, y: mine.y, z: mine.z, vx: 0, vy: 0, vz: 0, yaw: mine.yaw, onGround: false };
-			else {
-				const dx = mine.x - body.x, dy = mine.y - body.y, dz = mine.z - body.z;
-				if (Math.hypot(dx, dy, dz) > 1.5) {
-					body.x = mine.x; body.y = mine.y; body.z = mine.z;
-					body.vx = 0; body.vy = 0; body.vz = 0;
-				} else {
-					body.x += dx * 0.25;
-					body.y += dy * 0.25;
-					body.z += dz * 0.25;
-				}
-			}
-			if (!hasLooked) { yaw = mine.yaw; body.yaw = yaw; }
-		}
+		remote.push(msg.serverTime, msg.players);
 		if (world) {
 			for (const d of msg.blocks) world.set(d.x, d.y, d.z, d.block);
 			if (msg.blocks.length > 0) view?.flush();
 		}
-		addEntities();
+		const mine = msg.players.find((p) => p.id === myId);
+		if (mine && world) {
+			if (!body) body = new LocalBody(mine.x, mine.y, mine.z, mine.yaw, world);
+			else body.reconcile(mine.x, mine.y, mine.z);
+			if (!hasLooked) yaw = mine.yaw;
+		}
 		return;
 	}
 	if (msg.t === "round") {
@@ -135,26 +116,27 @@ function handle(msg: ServerMsg): void {
 	if (msg.t === "event" && msg.kind === "death") banner = `${msg.name} is out`;
 }
 
-// --- other players as boxes (skinned models land next) ---------------------------
+// --- other players -------------------------------------------------------------
 
 const entityGeometry = new BoxGeometry(0.6, 1.8, 0.6);
 const entityMeshes = new Map<string, Mesh<BoxGeometry, MeshBasicMaterial>>();
 
-function addEntities(): void {
+function drawEntities(sampled: Map<string, PlayerState>): void {
 	if (!view) return;
 	for (const [id, mesh] of entityMeshes) {
-		if (!players.some((p) => p.id === id && p.alive)) {
+		const p = sampled.get(id);
+		if (!p || !p.alive || id === myId) {
 			view.scene.remove(mesh);
 			entityMeshes.delete(id);
 		}
 	}
-	for (const p of players) {
-		if (p.id === myId || !p.alive) continue;
-		let mesh = entityMeshes.get(p.id);
+	for (const [id, p] of sampled) {
+		if (id === myId || !p.alive) continue;
+		let mesh = entityMeshes.get(id);
 		if (!mesh) {
 			const color = p.team === "red" ? "#e04040" : p.team === "blue" ? "#4060e0" : p.bot ? "#b9c2cc" : "#f0f0f0";
 			mesh = new Mesh(entityGeometry, new MeshBasicMaterial({ color: new Color(color) }));
-			entityMeshes.set(p.id, mesh);
+			entityMeshes.set(id, mesh);
 			view.scene.add(mesh);
 		}
 		mesh.position.set(p.x, p.y + 0.9, p.z);
@@ -166,13 +148,13 @@ function addEntities(): void {
 
 /** Gold wireframe on the cell under the crosshair. */
 let highlight: LineSegments | null = null;
-const lookDirection = new Vector3();
+const lookDir = new Vector3();
 
 function targetCell() {
 	if (!view || !world) return null;
 	const eye = view.camera.position;
-	view.camera.getWorldDirection(lookDirection);
-	return raycast(world, [eye.x, eye.y, eye.z], [lookDirection.x, lookDirection.y, lookDirection.z], 6);
+	view.camera.getWorldDirection(lookDir);
+	return raycast(world, [eye.x, eye.y, eye.z], [lookDir.x, lookDir.y, lookDir.z], 5);
 }
 
 canvas.addEventListener("contextmenu", (e) => e.preventDefault());
@@ -206,10 +188,18 @@ addEventListener(
 
 // --- frame loop ------------------------------------------------------------------
 
+let lastFrame = performance.now();
+
 function resize(): void {
 	if (!view) return;
-	// Full-bleed 3D view: the grid's fixed 640x640 box and page margins go away.
-	for (const [prop, value] of Object.entries({ position: "fixed", inset: "0", width: "100vw", height: "100vh", border: "0", margin: "0" }))
+	for (const [prop, value] of Object.entries({
+		position: "fixed",
+		inset: "0",
+		width: "100vw",
+		height: "100vh",
+		border: "0",
+		margin: "0",
+	}))
 		canvas.style.setProperty(prop, value);
 	document.body.style.overflow = "hidden";
 	document.documentElement.style.overflow = "hidden";
@@ -228,37 +218,26 @@ addEventListener("mousemove", (e: MouseEvent) => {
 	pitch = Math.max(-1.5, Math.min(1.5, pitch - e.movementY * 0.0022));
 });
 
+function intent() {
+	return {
+		forward: (keys.has("KeyW") ? 1 : 0) + (keys.has("KeyS") ? -1 : 0),
+		strafe: (keys.has("KeyD") ? 1 : 0) + (keys.has("KeyA") ? -1 : 0),
+		jump: keys.has("Space"),
+		sprint: keys.has("ShiftLeft") || keys.has("ShiftRight"),
+	};
+}
+
 function frame(): void {
+	const now = performance.now();
+	const dt = Math.min(50, now - lastFrame);
+	lastFrame = now;
+
 	if (view) {
 		const cam = view.camera;
-		const me = players.find((p) => p.id === myId);
-		const now = performance.now();
-		const dt = Math.min(0.05, (now - lastFrameAt) / 1000);
-		lastFrameAt = now;
-
-		if (body && joined && world) {
-			predAcc = Math.min(0.2, predAcc + dt);
-			const f = (keys.has("KeyW") ? 1 : 0) + (keys.has("KeyS") ? -1 : 0);
-			const s = (keys.has("KeyD") ? 1 : 0) + (keys.has("KeyA") ? -1 : 0);
-			const intent = {
-				forward: f,
-				strafe: s,
-				jump: keys.has("Space"),
-				sprint: keys.has("ShiftLeft") || keys.has("ShiftRight"),
-			};
-			const solid = (x: number, y: number, z: number) => world!.isSolid(x, y, z);
-			body.yaw = yaw;
-			while (predAcc >= 0.05) {
-				const wet = world.get(Math.floor(body.x), Math.floor(body.y), Math.floor(body.z)) === 8;
-				moveBody(solid, body, intent, wet ? 0.55 : 1);
-				predAcc -= 0.05;
-			}
-			cam.position.set(body.x, body.y + 1.62, body.z);
-		} else if (me) {
-			cam.position.set(me.x, me.y + 1.62, me.z);
-		}
-		if (!hasLooked && me) yaw = me.yaw;
+		if (body) cam.position.set(body.body.x, body.eyeY, body.body.z);
 		cam.rotation.set(pitch, yaw, 0, "YXZ");
+
+		drawEntities(remote.sample(Date.now()));
 
 		if (!highlight) {
 			highlight = new LineSegments(
@@ -273,7 +252,7 @@ function frame(): void {
 		if (hit) highlight.position.set(hit.x + 0.5, hit.y + 0.5, hit.z + 0.5);
 
 		view.render();
-		statusEl.textContent = `${myId || "…"} · ${view.fps()} fps${banner ? ` · ${banner}` : ""}`;
+		statusEl.textContent = `${myId || "…"} · ${view.fps()} fps · ${dt.toFixed(1)} ms${banner ? ` · ${banner}` : ""}`;
 	}
 	requestAnimationFrame(frame);
 }
@@ -286,19 +265,28 @@ addEventListener("keydown", (e: KeyboardEvent) => {
 });
 addEventListener("keyup", (e: KeyboardEvent) => keys.delete(e.code));
 
+// Simulation and the intent it feeds run on a fixed timer, not on frames: a slow or
+// throttled renderer must not slow the player down. 20 Hz matches the server tick.
 setInterval(() => {
-	if (!joined || !ws || ws.readyState !== WebSocket.OPEN) return;
-	const f = (keys.has("KeyW") ? 1 : 0) + (keys.has("KeyS") ? -1 : 0);
-	const s = (keys.has("KeyD") ? 1 : 0) + (keys.has("KeyA") ? -1 : 0);
+	if (!joined) return;
+	const want = intent();
+	if (body) {
+		body.body.yaw = yaw;
+		body.step(want, 50);
+	}
+	if (!ws || ws.readyState !== WebSocket.OPEN) return;
 	const bit = (code: string, bitIndex: number) => (keys.has(code) ? 1 << bitIndex : 0);
 	const keysMask =
-		bit("KeyW", 0) | bit("KeyS", 1) | bit("KeyA", 2) | bit("KeyD", 3) | bit("Space", 4) | bit("ShiftLeft", 5);  send({ t: "input", seq: ++seq, move: [f, s], yaw, pitch, keys: keysMask, look: hasLooked });
+		bit("KeyW", 0) | bit("KeyS", 1) | bit("KeyA", 2) | bit("KeyD", 3) | bit("Space", 4) | bit("ShiftLeft", 5);
+	send({ t: "input", seq: ++seq, move: [want.forward, want.strafe], yaw, pitch, keys: keysMask });
 }, 50);
 
 // Dev-only handle so the view can be inspected from the console (`vite` sets DEV; the
 // production bundle leaves this branch out).
 if ((import.meta as { env?: { DEV?: boolean } }).env?.DEV) {
-	Object.assign(window, { __blocked: { targetCell, send, get view() { return view; }, get world() { return world; } } });
+	Object.assign(window, {
+		__blocked: { targetCell, send, get view() { return view; }, get world() { return world; }, get body() { return body; } },
+	});
 }
 
 playBtn.addEventListener("click", connect);
