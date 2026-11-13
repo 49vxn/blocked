@@ -41,7 +41,7 @@ import {
   inBounds,
 } from "../shared/blocks";
 import { earthquake, flood, meteor, type WorldView } from "./disasters";
-import { moveBody } from "./movement";
+import { moveBody } from "../shared/movement";
 
 const PORT = Number(process.env.PORT ?? DEFAULT_PORT);
 const TIME_SCALE = Math.max(1e-9, Number(process.env.TEST_TIME_SCALE ?? 1) || 1);

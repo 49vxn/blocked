@@ -1,7 +1,7 @@
 // The authoritative body: it stands on ground, jumps about one block, falls back, and
 // cannot walk through a wall.
 import { describe, expect, test } from "bun:test";
-import { moveBody, type Body, type Intent } from "../server/movement";
+import { moveBody, type Body, type Intent } from "../shared/movement";
 
 const ground = (x: number, y: number, z: number) => y < 1;
 const groundAndWall = (x: number, y: number, z: number) => y < 1 || x === 2;
@@ -46,8 +46,8 @@ describe("jump", () => {
       peak = Math.max(peak, b.y);
       if (i > 5 && b.onGround) break;
     }
-    expect(peak - start).toBeGreaterThan(0.9);
-    expect(peak - start).toBeLessThan(1.5);
+    expect(peak - start).toBeGreaterThan(1.8);
+    expect(peak - start).toBeLessThan(2.8);
     expect(b.onGround).toBe(true);
   });
 });

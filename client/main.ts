@@ -12,6 +12,7 @@ import {
 	MeshBasicMaterial,
 	Vector3,
 } from "three";
+import { moveBody, type Body } from "../shared/movement";
 import { buildWorld } from "./engine/arena";
 import { raycast } from "./engine/raycast";
 import type { World } from "./engine/world";
@@ -39,6 +40,12 @@ let pitch = 0;
 let hasLooked = false; // until the player moves the mouse, the server's spawn facing wins
 /** Block placed by right click; 1-9 pick, wheel cycles. Advisory: the server owns the rule. */
 let selected = 3;
+
+// Local prediction: the server still owns the truth, but the camera runs on this body so
+// movement is smooth between the 10 Hz snapshots.
+let body: Body | null = null;
+let predAcc = 0;
+let lastFrameAt = performance.now();
 
 const send = (msg: ClientMsg) => ws?.send(JSON.stringify(msg));
 
@@ -87,7 +94,22 @@ function handle(msg: ServerMsg): void {
 	if (msg.t === "snapshot") {
 		players = msg.players;
 		const mine = msg.players.find((p) => p.id === myId);
-		if (!hasLooked && mine) yaw = mine.yaw;
+		if (mine) {
+			if (!body)
+				body = { x: mine.x, y: mine.y, z: mine.z, vx: 0, vy: 0, vz: 0, yaw: mine.yaw, onGround: false };
+			else {
+				const dx = mine.x - body.x, dy = mine.y - body.y, dz = mine.z - body.z;
+				if (Math.hypot(dx, dy, dz) > 1.5) {
+					body.x = mine.x; body.y = mine.y; body.z = mine.z;
+					body.vx = 0; body.vy = 0; body.vz = 0;
+				} else {
+					body.x += dx * 0.25;
+					body.y += dy * 0.25;
+					body.z += dz * 0.25;
+				}
+			}
+			if (!hasLooked) { yaw = mine.yaw; body.yaw = yaw; }
+		}
 		if (world) {
 			for (const d of msg.blocks) world.set(d.x, d.y, d.z, d.block);
 			if (msg.blocks.length > 0) view?.flush();
@@ -159,22 +181,14 @@ canvas.addEventListener("mousedown", (e: MouseEvent) => {
 	// at the view centre either way.
 	if (!joined) return;
 	const hit = targetCell();
-	statusEl.textContent = hit ? `hit ${hit.x},${hit.y},${hit.z} f${hit.face}` : "no target";
 	if (!hit) return;
 	if (e.button === 0) {
 		send({ t: "break", x: hit.x, y: hit.y, z: hit.z });
 		return;
 	}
 	if (e.button === 2) {
-		// PROTOCOL: place writes the cell adjacent in the face direction, never the one hit.
-		send({
-			t: "place",
-			x: hit.x + hit.normal[0],
-			y: hit.y + hit.normal[1],
-			z: hit.z + hit.normal[2],
-			block: selected,
-			face: hit.face,
-		});
+		// PROTOCOL: name the cell hit and the face; the server writes the empty neighbour itself.
+		send({ t: "place", x: hit.x, y: hit.y, z: hit.z, block: selected, face: hit.face });
 	}
 });
 
@@ -218,8 +232,29 @@ function frame(): void {
 	if (view) {
 		const cam = view.camera;
 		const me = players.find((p) => p.id === myId);
-		if (me) {
-			// The server owns the position; the camera follows it with an eye height.
+		const now = performance.now();
+		const dt = Math.min(0.05, (now - lastFrameAt) / 1000);
+		lastFrameAt = now;
+
+		if (body && joined && world) {
+			predAcc = Math.min(0.2, predAcc + dt);
+			const f = (keys.has("KeyW") ? 1 : 0) + (keys.has("KeyS") ? -1 : 0);
+			const s = (keys.has("KeyD") ? 1 : 0) + (keys.has("KeyA") ? -1 : 0);
+			const intent = {
+				forward: f,
+				strafe: s,
+				jump: keys.has("Space"),
+				sprint: keys.has("ShiftLeft") || keys.has("ShiftRight"),
+			};
+			const solid = (x: number, y: number, z: number) => world!.isSolid(x, y, z);
+			body.yaw = yaw;
+			while (predAcc >= 0.05) {
+				const wet = world.get(Math.floor(body.x), Math.floor(body.y), Math.floor(body.z)) === 8;
+				moveBody(solid, body, intent, wet ? 0.55 : 1);
+				predAcc -= 0.05;
+			}
+			cam.position.set(body.x, body.y + 1.62, body.z);
+		} else if (me) {
 			cam.position.set(me.x, me.y + 1.62, me.z);
 		}
 		if (!hasLooked && me) yaw = me.yaw;
@@ -259,6 +294,12 @@ setInterval(() => {
 	const keysMask =
 		bit("KeyW", 0) | bit("KeyS", 1) | bit("KeyA", 2) | bit("KeyD", 3) | bit("Space", 4) | bit("ShiftLeft", 5);  send({ t: "input", seq: ++seq, move: [f, s], yaw, pitch, keys: keysMask, look: hasLooked });
 }, 50);
+
+// Dev-only handle so the view can be inspected from the console (`vite` sets DEV; the
+// production bundle leaves this branch out).
+if ((import.meta as { env?: { DEV?: boolean } }).env?.DEV) {
+	Object.assign(window, { __blocked: { targetCell, send, get view() { return view; }, get world() { return world; } } });
+}
 
 playBtn.addEventListener("click", connect);
 nameInput.addEventListener("keydown", (e) => {

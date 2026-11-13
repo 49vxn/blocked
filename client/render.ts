@@ -56,7 +56,7 @@ export async function loadAtlas(atlasUrl = "/textures/atlas.png"): Promise<Textu
 
 export async function createVoxelRenderer(canvas: HTMLCanvasElement, world: World): Promise<VoxelRenderer> {
 	const renderer = new WebGLRenderer({ canvas, antialias: false, powerPreference: "high-performance" });
-	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1));
 	renderer.setClearColor(new Color("#9dc7ef"));
 	renderer.outputColorSpace = SRGBColorSpace;
 

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Blocked — engine preview</title>
+		<style>
+			html,
+			body {
+				margin: 0;
+				height: 100%;
+				overflow: hidden;
+				background: #9dc7ef;
+			}
+			canvas {
+				display: block;
+				width: 100%;
+				height: 100%;
+			}
+			#hud {
+				position: fixed;
+				left: 10px;
+				bottom: 10px;
+				padding: 6px 9px;
+				font: 12px/1.4 ui-monospace, monospace;
+				color: #f6e6a8;
+				background: #12100be6;
+				border: 1px solid #d9b955;
+				border-radius: 4px;
+				white-space: pre;
+				pointer-events: none;
+			}
+			#help {
+				position: fixed;
+				left: 10px;
+				top: 10px;
+				padding: 8px 10px;
+				font: 12px/1.5 ui-monospace, monospace;
+				color: #f6e6a8;
+				background: #12100be6;
+				border: 1px solid #d9b955;
+				border-radius: 4px;
+				pointer-events: none;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="c"></canvas>
+		<div id="hud"></div>
+		<div id="help">click to look · WASD fly · Space/Ctrl up/down · Shift fast</div>
+		<script type="module" src="/preview.ts"></script>
+	</body>
+</html>

@@ -1,7 +1,7 @@
 // server/movement.ts — the authoritative body controller.
 // The server owns position: clients send intent only. Fixed 20 Hz, per-tick velocities,
 // axis-separated AABB collision (Y, then X, then Z) so a fast body cannot tunnel.
-import { PLAYER_HALF, PLAYER_HEIGHT } from "../shared/constants";
+import { PLAYER_HALF, PLAYER_HEIGHT } from "./constants";
 
 /** True when the cell is a block a body cannot enter (water is not). */
 export type CollisionWorld = (x: number, y: number, z: number) => boolean;
@@ -29,7 +29,7 @@ export type Intent = {
 type Box = [number, number, number, number, number, number];
 
 const GRAVITY = 0.08; // per tick^2 (32 blocks/s^2 at 20 Hz)
-const JUMP_VELOCITY = 0.43; // ~1.15 blocks of clearance
+const JUMP_VELOCITY = 0.62; // ~2.4 blocks of clearance
 const WALK_SPEED = 0.21; // 4.2 blocks/s
 const SPRINT_SPEED = 0.27; // 5.4 blocks/s
 const GROUND_FRICTION = 0.55; // replace part of the old velocity each tick: instant turns
