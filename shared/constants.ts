@@ -17,6 +17,9 @@ export const ATTACK_COOLDOWN_MS = 400;
 export const INTENT_DECAY_MS = 500; // silent client stops, never drifts
 
 export const EYE_HEIGHT = 1.6;
+// Bits in the `input.keys` mask (client sends Space/Shift alongside WASD).
+export const KEY_JUMP = 1 << 4;
+export const KEY_SPRINT = 1 << 5;
 export const PLAYER_HEIGHT = 1.8;
 export const PLAYER_HALF = 0.3; // hitbox 0.6 × 1.8 × 0.6
 export const MOVE_SPEED = 4.3; // blocks per second

@@ -21,504 +21,1190 @@
       "block": 1
     },
     {
-      "zone": "quad slab",
+      "zone": "border hedge west",
       "from": [
         0,
         1,
-        44
+        0
       ],
       "to": [
+        0,
+        2,
+        63
+      ],
+      "block": 19
+    },
+    {
+      "zone": "border hedge east",
+      "from": [
+        63,
+        1,
+        0
+      ],
+      "to": [
+        63,
+        2,
+        63
+      ],
+      "block": 19
+    },
+    {
+      "zone": "border hedge north",
+      "from": [
+        1,
+        1,
+        0
+      ],
+      "to": [
+        62,
+        2,
+        0
+      ],
+      "block": 19
+    },
+    {
+      "zone": "border hedge south",
+      "from": [
+        1,
+        1,
+        63
+      ],
+      "to": [
+        62,
+        2,
+        63
+      ],
+      "block": 19
+    },
+    {
+      "zone": "boundary pier",
+      "from": [
+        0,
+        1,
+        0
+      ],
+      "to": [
+        0,
+        3,
+        0
+      ],
+      "block": 2
+    },
+    {
+      "zone": "boundary pier",
+      "from": [
+        0,
+        1,
+        32
+      ],
+      "to": [
+        0,
+        3,
+        32
+      ],
+      "block": 2
+    },
+    {
+      "zone": "boundary pier",
+      "from": [
+        0,
+        1,
+        63
+      ],
+      "to": [
+        0,
+        3,
+        63
+      ],
+      "block": 2
+    },
+    {
+      "zone": "boundary pier",
+      "from": [
+        32,
+        1,
+        0
+      ],
+      "to": [
+        32,
+        3,
+        0
+      ],
+      "block": 2
+    },
+    {
+      "zone": "boundary pier",
+      "from": [
+        63,
+        1,
+        0
+      ],
+      "to": [
+        63,
+        3,
+        0
+      ],
+      "block": 2
+    },
+    {
+      "zone": "boundary pier",
+      "from": [
+        63,
+        1,
+        32
+      ],
+      "to": [
+        63,
+        3,
+        32
+      ],
+      "block": 2
+    },
+    {
+      "zone": "boundary pier",
+      "from": [
         63,
         1,
         63
       ],
-      "block": 5
+      "to": [
+        63,
+        3,
+        63
+      ],
+      "block": 2
     },
     {
-      "zone": "path red-to-science",
+      "zone": "boundary pier",
       "from": [
-        13,
+        32,
         1,
-        8
+        63
       ],
       "to": [
-        23,
-        1,
-        10
+        32,
+        3,
+        63
       ],
-      "block": 5
+      "block": 2
     },
     {
-      "zone": "path science-flank",
+      "zone": "quad east-west path",
       "from": [
-        20,
-        1,
-        14
+        3,
+        0,
+        43
       ],
       "to": [
-        23,
-        1,
-        25
+        60,
+        0,
+        45
       ],
-      "block": 5
+      "block": 17
+    },
+    {
+      "zone": "spine library-south",
+      "from": [
+        31,
+        0,
+        39
+      ],
+      "to": [
+        33,
+        0,
+        63
+      ],
+      "block": 17
+    },
+    {
+      "zone": "spine science-library",
+      "from": [
+        31,
+        0,
+        17
+      ],
+      "to": [
+        33,
+        0,
+        23
+      ],
+      "block": 17
     },
     {
       "zone": "path library-east",
       "from": [
-        40,
-        1,
+        41,
+        0,
         29
       ],
       "to": [
-        54,
-        1,
+        46,
+        0,
         31
       ],
-      "block": 5
+      "block": 17
     },
     {
-      "zone": "path east-south",
+      "zone": "path hall-library",
       "from": [
-        52,
-        1,
+        18,
+        0,
+        29
+      ],
+      "to": [
+        26,
+        0,
         31
       ],
-      "to": [
-        54,
-        1,
-        50
-      ],
-      "block": 5
+      "block": 17
     },
     {
-      "zone": "science wall north",
+      "zone": "path red gate",
       "from": [
-        16,
-        1,
-        5
-      ],
-      "to": [
-        47,
-        3,
+        14,
+        0,
         7
       ],
-      "block": 5
+      "to": [
+        25,
+        0,
+        9
+      ],
+      "block": 17
     },
     {
-      "zone": "science wall south",
+      "zone": "path red south",
       "from": [
-        16,
-        1,
-        11
-      ],
-      "to": [
-        47,
-        3,
-        13
-      ],
-      "block": 5
-    },
-    {
-      "zone": "science wall west",
-      "from": [
-        27,
-        1,
-        2
-      ],
-      "to": [
-        29,
-        3,
-        14
-      ],
-      "block": 5
-    },
-    {
-      "zone": "science wall east",
-      "from": [
-        33,
-        1,
-        2
-      ],
-      "to": [
-        35,
-        3,
-        14
-      ],
-      "block": 5
-    },
-    {
-      "zone": "science south gate",
-      "from": [
-        20,
-        1,
-        11
-      ],
-      "to": [
-        22,
-        3,
-        13
-      ],
-      "block": 0
-    },
-    {
-      "zone": "science crossing north",
-      "from": [
-        30,
-        1,
-        5
-      ],
-      "to": [
-        32,
-        3,
-        7
-      ],
-      "block": 0
-    },
-    {
-      "zone": "science crossing south",
-      "from": [
-        30,
-        1,
-        11
-      ],
-      "to": [
-        32,
-        3,
-        13
-      ],
-      "block": 0
-    },
-    {
-      "zone": "science crossing west",
-      "from": [
-        27,
-        1,
-        8
-      ],
-      "to": [
-        29,
-        3,
-        10
-      ],
-      "block": 0
-    },
-    {
-      "zone": "science crossing east",
-      "from": [
-        33,
-        1,
-        8
-      ],
-      "to": [
-        35,
-        3,
-        10
-      ],
-      "block": 0
-    },
-    {
-      "zone": "science skylight mid",
-      "from": [
-        30,
-        4,
-        5
-      ],
-      "to": [
-        32,
-        4,
-        10
-      ],
-      "block": 4
-    },
-    {
-      "zone": "science skylight west",
-      "from": [
-        16,
-        4,
-        8
-      ],
-      "to": [
         23,
+        0,
+        9
+      ],
+      "to": [
+        25,
+        0,
+        31
+      ],
+      "block": 17
+    },
+    {
+      "zone": "path blue gate",
+      "from": [
+        33,
+        0,
+        53
+      ],
+      "to": [
+        51,
+        0,
+        55
+      ],
+      "block": 17
+    },
+    {
+      "zone": "path north strip",
+      "from": [
+        31,
+        0,
+        1
+      ],
+      "to": [
+        33,
+        0,
+        3
+      ],
+      "block": 17
+    },
+    {
+      "zone": "science floor",
+      "from": [
+        17,
+        0,
+        5
+      ],
+      "to": [
+        50,
+        0,
+        15
+      ],
+      "block": 9
+    },
+    {
+      "zone": "science n",
+      "from": [
+        16,
+        1,
+        4
+      ],
+      "to": [
+        51,
         4,
-        10
+        4
+      ],
+      "block": 2
+    },
+    {
+      "zone": "science s",
+      "from": [
+        16,
+        1,
+        16
+      ],
+      "to": [
+        51,
+        4,
+        16
+      ],
+      "block": 2
+    },
+    {
+      "zone": "science w",
+      "from": [
+        16,
+        1,
+        4
+      ],
+      "to": [
+        16,
+        4,
+        16
+      ],
+      "block": 2
+    },
+    {
+      "zone": "science e",
+      "from": [
+        51,
+        1,
+        4
+      ],
+      "to": [
+        51,
+        4,
+        16
+      ],
+      "block": 2
+    },
+    {
+      "zone": "science interior",
+      "from": [
+        17,
+        1,
+        5
+      ],
+      "to": [
+        50,
+        4,
+        15
+      ],
+      "block": 0
+    },
+    {
+      "zone": "science corridor wall n",
+      "from": [
+        17,
+        1,
+        8
+      ],
+      "to": [
+        50,
+        4,
+        8
+      ],
+      "block": 2
+    },
+    {
+      "zone": "science corridor wall s",
+      "from": [
+        17,
+        1,
+        12
+      ],
+      "to": [
+        50,
+        4,
+        12
+      ],
+      "block": 2
+    },
+    {
+      "zone": "science corridor door n",
+      "from": [
+        22,
+        1,
+        8
+      ],
+      "to": [
+        24,
+        2,
+        8
+      ],
+      "block": 0
+    },
+    {
+      "zone": "science corridor door s",
+      "from": [
+        22,
+        1,
+        12
+      ],
+      "to": [
+        24,
+        2,
+        12
+      ],
+      "block": 0
+    },
+    {
+      "zone": "science corridor door n",
+      "from": [
+        33,
+        1,
+        8
+      ],
+      "to": [
+        35,
+        2,
+        8
+      ],
+      "block": 0
+    },
+    {
+      "zone": "science corridor door s",
+      "from": [
+        33,
+        1,
+        12
+      ],
+      "to": [
+        35,
+        2,
+        12
+      ],
+      "block": 0
+    },
+    {
+      "zone": "science corridor door n",
+      "from": [
+        44,
+        1,
+        8
+      ],
+      "to": [
+        46,
+        2,
+        8
+      ],
+      "block": 0
+    },
+    {
+      "zone": "science corridor door s",
+      "from": [
+        44,
+        1,
+        12
+      ],
+      "to": [
+        46,
+        2,
+        12
+      ],
+      "block": 0
+    },
+    {
+      "zone": "science room divider n",
+      "from": [
+        27,
+        1,
+        5
+      ],
+      "to": [
+        27,
+        4,
+        7
+      ],
+      "block": 2
+    },
+    {
+      "zone": "science room divider s",
+      "from": [
+        27,
+        1,
+        13
+      ],
+      "to": [
+        27,
+        4,
+        15
+      ],
+      "block": 2
+    },
+    {
+      "zone": "science room divider n",
+      "from": [
+        40,
+        1,
+        5
+      ],
+      "to": [
+        40,
+        4,
+        7
+      ],
+      "block": 2
+    },
+    {
+      "zone": "science room divider s",
+      "from": [
+        40,
+        1,
+        13
+      ],
+      "to": [
+        40,
+        4,
+        15
+      ],
+      "block": 2
+    },
+    {
+      "zone": "science window",
+      "from": [
+        18,
+        2,
+        16
+      ],
+      "to": [
+        29,
+        3,
+        16
       ],
       "block": 4
     },
     {
-      "zone": "library shell",
+      "zone": "science window",
       "from": [
-        24,
+        37,
+        2,
+        16
+      ],
+      "to": [
+        48,
+        3,
+        16
+      ],
+      "block": 4
+    },
+    {
+      "zone": "science window",
+      "from": [
+        18,
+        2,
+        4
+      ],
+      "to": [
+        29,
+        3,
+        4
+      ],
+      "block": 4
+    },
+    {
+      "zone": "science window",
+      "from": [
+        37,
+        2,
+        4
+      ],
+      "to": [
+        48,
+        3,
+        4
+      ],
+      "block": 4
+    },
+    {
+      "zone": "science window w",
+      "from": [
+        16,
+        2,
+        6
+      ],
+      "to": [
+        16,
+        3,
+        8
+      ],
+      "block": 4
+    },
+    {
+      "zone": "science window w2",
+      "from": [
+        16,
+        2,
+        12
+      ],
+      "to": [
+        16,
+        3,
+        14
+      ],
+      "block": 4
+    },
+    {
+      "zone": "science window e",
+      "from": [
+        51,
+        2,
+        6
+      ],
+      "to": [
+        51,
+        3,
+        8
+      ],
+      "block": 4
+    },
+    {
+      "zone": "science window e2",
+      "from": [
+        51,
+        2,
+        12
+      ],
+      "to": [
+        51,
+        3,
+        14
+      ],
+      "block": 4
+    },
+    {
+      "zone": "science door s",
+      "from": [
+        32,
+        1,
+        16
+      ],
+      "to": [
+        34,
+        2,
+        16
+      ],
+      "block": 0
+    },
+    {
+      "zone": "science door n",
+      "from": [
+        32,
+        1,
+        4
+      ],
+      "to": [
+        34,
+        2,
+        4
+      ],
+      "block": 0
+    },
+    {
+      "zone": "science door w",
+      "from": [
+        16,
+        1,
+        9
+      ],
+      "to": [
+        16,
+        2,
+        11
+      ],
+      "block": 0
+    },
+    {
+      "zone": "science door e",
+      "from": [
+        51,
+        1,
+        9
+      ],
+      "to": [
+        51,
+        2,
+        11
+      ],
+      "block": 0
+    },
+    {
+      "zone": "science roof",
+      "from": [
+        16,
+        5,
+        4
+      ],
+      "to": [
+        51,
+        5,
+        16
+      ],
+      "block": 14
+    },
+    {
+      "zone": "science skylight",
+      "from": [
+        22,
+        5,
+        9
+      ],
+      "to": [
+        45,
+        5,
+        11
+      ],
+      "block": 4
+    },
+    {
+      "zone": "science parapet n",
+      "from": [
+        16,
+        6,
+        4
+      ],
+      "to": [
+        51,
+        6,
+        4
+      ],
+      "block": 7
+    },
+    {
+      "zone": "science parapet s",
+      "from": [
+        16,
+        6,
+        16
+      ],
+      "to": [
+        51,
+        6,
+        16
+      ],
+      "block": 7
+    },
+    {
+      "zone": "science parapet w",
+      "from": [
+        16,
+        6,
+        4
+      ],
+      "to": [
+        16,
+        6,
+        16
+      ],
+      "block": 7
+    },
+    {
+      "zone": "science parapet e",
+      "from": [
+        51,
+        6,
+        4
+      ],
+      "to": [
+        51,
+        6,
+        16
+      ],
+      "block": 7
+    },
+    {
+      "zone": "science canopy",
+      "from": [
+        30,
+        4,
+        17
+      ],
+      "to": [
+        36,
+        4,
+        18
+      ],
+      "block": 3
+    },
+    {
+      "zone": "science canopy post w",
+      "from": [
+        30,
+        1,
+        18
+      ],
+      "to": [
+        30,
+        3,
+        18
+      ],
+      "block": 3
+    },
+    {
+      "zone": "science canopy post e",
+      "from": [
+        36,
+        1,
+        18
+      ],
+      "to": [
+        36,
+        3,
+        18
+      ],
+      "block": 3
+    },
+    {
+      "zone": "library floor",
+      "from": [
+        27,
+        0,
+        25
+      ],
+      "to": [
+        40,
+        0,
+        38
+      ],
+      "block": 3
+    },
+    {
+      "zone": "library n",
+      "from": [
+        26,
         1,
         24
       ],
       "to": [
-        39,
+        41,
+        6,
+        24
+      ],
+      "block": 2
+    },
+    {
+      "zone": "library s",
+      "from": [
+        26,
+        1,
+        39
+      ],
+      "to": [
+        41,
         6,
         39
       ],
       "block": 2
     },
     {
-      "zone": "library interior air",
+      "zone": "library w",
       "from": [
-        25,
+        26,
+        1,
+        24
+      ],
+      "to": [
+        26,
+        6,
+        39
+      ],
+      "block": 2
+    },
+    {
+      "zone": "library e",
+      "from": [
+        41,
+        1,
+        24
+      ],
+      "to": [
+        41,
+        6,
+        39
+      ],
+      "block": 2
+    },
+    {
+      "zone": "library interior",
+      "from": [
+        27,
         1,
         25
       ],
       "to": [
-        38,
+        40,
         6,
         38
       ],
       "block": 0
     },
     {
-      "zone": "library floor",
-      "from": [
-        25,
-        0,
-        25
-      ],
-      "to": [
-        38,
-        0,
-        38
-      ],
-      "block": 3
-    },
-    {
       "zone": "library mezzanine",
       "from": [
-        25,
+        27,
         4,
         25
       ],
       "to": [
-        38,
+        40,
         4,
-        29
+        31
       ],
       "block": 3
     },
     {
       "zone": "library stair 1",
       "from": [
-        37,
-        1,
-        30
-      ],
-      "to": [
-        37,
+        39,
         1,
         32
+      ],
+      "to": [
+        40,
+        1,
+        34
       ],
       "block": 3
     },
     {
       "zone": "library stair 2",
       "from": [
-        36,
-        2,
-        30
-      ],
-      "to": [
-        36,
+        39,
         2,
         32
+      ],
+      "to": [
+        40,
+        2,
+        34
       ],
       "block": 3
     },
     {
       "zone": "library stair 3",
       "from": [
-        35,
-        3,
-        30
-      ],
-      "to": [
-        35,
+        39,
         3,
         32
+      ],
+      "to": [
+        40,
+        3,
+        34
       ],
       "block": 3
     },
     {
-      "zone": "library shelves a",
+      "zone": "library column",
       "from": [
-        26,
+        30,
         1,
-        33
+        29
+      ],
+      "to": [
+        30,
+        6,
+        29
+      ],
+      "block": 2
+    },
+    {
+      "zone": "library column",
+      "from": [
+        37,
+        1,
+        29
       ],
       "to": [
         37,
+        6,
+        29
+      ],
+      "block": 2
+    },
+    {
+      "zone": "library column",
+      "from": [
+        30,
+        1,
+        34
+      ],
+      "to": [
+        30,
+        6,
+        34
+      ],
+      "block": 2
+    },
+    {
+      "zone": "library column",
+      "from": [
+        37,
+        1,
+        34
+      ],
+      "to": [
+        37,
+        6,
+        34
+      ],
+      "block": 2
+    },
+    {
+      "zone": "library shelves a",
+      "from": [
+        28,
+        1,
+        35
+      ],
+      "to": [
+        29,
         2,
-        33
+        36
       ],
       "block": 3
     },
     {
       "zone": "library shelves b",
       "from": [
-        26,
+        38,
         1,
-        36
+        35
       ],
       "to": [
-        37,
+        39,
         2,
         36
       ],
       "block": 3
     },
     {
-      "zone": "library glass north a",
+      "zone": "library glass n",
+      "from": [
+        28,
+        1,
+        24
+      ],
+      "to": [
+        39,
+        4,
+        24
+      ],
+      "block": 4
+    },
+    {
+      "zone": "library glass s1",
+      "from": [
+        28,
+        1,
+        39
+      ],
+      "to": [
+        31,
+        3,
+        39
+      ],
+      "block": 4
+    },
+    {
+      "zone": "library glass s2",
+      "from": [
+        35,
+        1,
+        39
+      ],
+      "to": [
+        38,
+        3,
+        39
+      ],
+      "block": 4
+    },
+    {
+      "zone": "library glass w",
       "from": [
         26,
-        2,
-        24
-      ],
-      "to": [
-        29,
-        3,
-        24
-      ],
-      "block": 4
-    },
-    {
-      "zone": "library glass north b",
-      "from": [
-        33,
-        2,
-        24
-      ],
-      "to": [
-        37,
-        3,
-        24
-      ],
-      "block": 4
-    },
-    {
-      "zone": "library glass south a",
-      "from": [
-        26,
-        2,
-        39
-      ],
-      "to": [
-        29,
-        3,
-        39
-      ],
-      "block": 4
-    },
-    {
-      "zone": "library glass south b",
-      "from": [
-        33,
-        2,
-        39
-      ],
-      "to": [
-        37,
-        3,
-        39
-      ],
-      "block": 4
-    },
-    {
-      "zone": "library glass west",
-      "from": [
-        24,
         2,
         26
       ],
       "to": [
-        24,
+        26,
         3,
         37
       ],
       "block": 4
     },
     {
-      "zone": "library glass east a",
+      "zone": "library glass e",
       "from": [
-        39,
+        41,
         2,
         26
       ],
       "to": [
-        39,
-        3,
-        29
-      ],
-      "block": 4
-    },
-    {
-      "zone": "library glass east b",
-      "from": [
-        39,
-        2,
-        32
-      ],
-      "to": [
-        39,
+        41,
         3,
         37
       ],
       "block": 4
     },
     {
-      "zone": "library door north",
+      "zone": "library door n",
       "from": [
-        30,
+        32,
         1,
         24
       ],
       "to": [
-        32,
+        34,
         2,
         24
       ],
       "block": 0
     },
     {
-      "zone": "library door south",
+      "zone": "library door s",
       "from": [
-        30,
+        32,
         1,
         39
       ],
       "to": [
-        32,
+        34,
         2,
         39
       ],
       "block": 0
     },
     {
-      "zone": "library door west",
+      "zone": "library door w",
       "from": [
-        24,
-        1,
-        24
-      ],
-      "to": [
-        24,
-        2,
-        25
-      ],
-      "block": 0
-    },
-    {
-      "zone": "library door east",
-      "from": [
-        39,
+        26,
         1,
         30
       ],
       "to": [
-        39,
+        26,
+        2,
+        31
+      ],
+      "block": 0
+    },
+    {
+      "zone": "library door e",
+      "from": [
+        41,
+        1,
+        30
+      ],
+      "to": [
+        41,
         2,
         31
       ],
@@ -527,145 +1213,859 @@
     {
       "zone": "library roof",
       "from": [
-        24,
+        26,
         7,
         24
       ],
       "to": [
-        39,
+        41,
         7,
         39
       ],
       "block": 7
     },
     {
-      "zone": "library landing north",
-      "from": [
-        30,
-        1,
-        23
-      ],
-      "to": [
-        32,
-        1,
-        23
-      ],
-      "block": 3
-    },
-    {
-      "zone": "library landing south",
-      "from": [
-        30,
-        1,
-        40
-      ],
-      "to": [
-        32,
-        1,
-        40
-      ],
-      "block": 3
-    },
-    {
-      "zone": "quad planter a",
-      "from": [
-        14,
-        2,
-        46
-      ],
-      "to": [
-        15,
-        2,
-        47
-      ],
-      "block": 3
-    },
-    {
-      "zone": "quad planter b",
-      "from": [
-        49,
-        2,
-        46
-      ],
-      "to": [
-        50,
-        2,
-        47
-      ],
-      "block": 3
-    },
-    {
-      "zone": "quad bench a",
-      "from": [
-        26,
-        2,
-        46
-      ],
-      "to": [
-        29,
-        2,
-        46
-      ],
-      "block": 3
-    },
-    {
-      "zone": "quad bench b",
-      "from": [
-        35,
-        2,
-        46
-      ],
-      "to": [
-        38,
-        2,
-        46
-      ],
-      "block": 3
-    },
-    {
-      "zone": "quad flag base",
+      "zone": "library skylight",
       "from": [
         31,
-        2,
-        51
-      ],
-      "to": [
-        33,
-        2,
-        53
-      ],
-      "block": 5
-    },
-    {
-      "zone": "quad flagpole",
-      "from": [
-        32,
-        2,
-        52
-      ],
-      "to": [
-        32,
         7,
-        52
-      ],
-      "block": 3
-    },
-    {
-      "zone": "red base floor",
-      "from": [
-        4,
-        0,
-        4
+        28
       ],
       "to": [
-        12,
-        0,
-        12
+        36,
+        7,
+        33
+      ],
+      "block": 4
+    },
+    {
+      "zone": "library parapet n",
+      "from": [
+        26,
+        8,
+        24
+      ],
+      "to": [
+        41,
+        8,
+        24
+      ],
+      "block": 14
+    },
+    {
+      "zone": "library parapet s",
+      "from": [
+        26,
+        8,
+        39
+      ],
+      "to": [
+        41,
+        8,
+        39
+      ],
+      "block": 14
+    },
+    {
+      "zone": "library parapet w",
+      "from": [
+        26,
+        8,
+        24
+      ],
+      "to": [
+        26,
+        8,
+        39
+      ],
+      "block": 14
+    },
+    {
+      "zone": "library parapet e",
+      "from": [
+        41,
+        8,
+        24
+      ],
+      "to": [
+        41,
+        8,
+        39
+      ],
+      "block": 14
+    },
+    {
+      "zone": "library lantern",
+      "from": [
+        32,
+        8,
+        30
+      ],
+      "to": [
+        35,
+        9,
+        33
+      ],
+      "block": 4
+    },
+    {
+      "zone": "library lantern cap",
+      "from": [
+        31,
+        10,
+        29
+      ],
+      "to": [
+        36,
+        10,
+        34
       ],
       "block": 7
     },
     {
-      "zone": "red base spawn pad",
+      "zone": "hall floor",
+      "from": [
+        5,
+        0,
+        23
+      ],
+      "to": [
+        17,
+        0,
+        37
+      ],
+      "block": 5
+    },
+    {
+      "zone": "hall n",
+      "from": [
+        4,
+        1,
+        22
+      ],
+      "to": [
+        18,
+        5,
+        22
+      ],
+      "block": 2
+    },
+    {
+      "zone": "hall s",
+      "from": [
+        4,
+        1,
+        38
+      ],
+      "to": [
+        18,
+        5,
+        38
+      ],
+      "block": 2
+    },
+    {
+      "zone": "hall w",
+      "from": [
+        4,
+        1,
+        22
+      ],
+      "to": [
+        4,
+        5,
+        38
+      ],
+      "block": 2
+    },
+    {
+      "zone": "hall e",
+      "from": [
+        18,
+        1,
+        22
+      ],
+      "to": [
+        18,
+        5,
+        38
+      ],
+      "block": 2
+    },
+    {
+      "zone": "hall interior",
+      "from": [
+        5,
+        1,
+        23
+      ],
+      "to": [
+        17,
+        5,
+        37
+      ],
+      "block": 0
+    },
+    {
+      "zone": "hall column",
+      "from": [
+        6,
+        1,
+        24
+      ],
+      "to": [
+        6,
+        5,
+        24
+      ],
+      "block": 3
+    },
+    {
+      "zone": "hall column",
+      "from": [
+        16,
+        1,
+        24
+      ],
+      "to": [
+        16,
+        5,
+        24
+      ],
+      "block": 3
+    },
+    {
+      "zone": "hall column",
+      "from": [
+        6,
+        1,
+        36
+      ],
+      "to": [
+        6,
+        5,
+        36
+      ],
+      "block": 3
+    },
+    {
+      "zone": "hall column",
+      "from": [
+        16,
+        1,
+        36
+      ],
+      "to": [
+        16,
+        5,
+        36
+      ],
+      "block": 3
+    },
+    {
+      "zone": "hall window e1",
+      "from": [
+        18,
+        2,
+        24
+      ],
+      "to": [
+        18,
+        3,
+        27
+      ],
+      "block": 4
+    },
+    {
+      "zone": "hall window e2",
+      "from": [
+        18,
+        2,
+        33
+      ],
+      "to": [
+        18,
+        3,
+        36
+      ],
+      "block": 4
+    },
+    {
+      "zone": "hall window s1",
+      "from": [
+        6,
+        2,
+        38
+      ],
+      "to": [
+        9,
+        3,
+        38
+      ],
+      "block": 4
+    },
+    {
+      "zone": "hall window s2",
+      "from": [
+        13,
+        2,
+        38
+      ],
+      "to": [
+        16,
+        3,
+        38
+      ],
+      "block": 4
+    },
+    {
+      "zone": "hall window w1",
+      "from": [
+        4,
+        2,
+        24
+      ],
+      "to": [
+        4,
+        3,
+        27
+      ],
+      "block": 4
+    },
+    {
+      "zone": "hall window w2",
+      "from": [
+        4,
+        2,
+        33
+      ],
+      "to": [
+        4,
+        3,
+        36
+      ],
+      "block": 4
+    },
+    {
+      "zone": "hall door e",
+      "from": [
+        18,
+        1,
+        29
+      ],
+      "to": [
+        18,
+        2,
+        31
+      ],
+      "block": 0
+    },
+    {
+      "zone": "hall door s",
+      "from": [
+        10,
+        1,
+        38
+      ],
+      "to": [
+        12,
+        2,
+        38
+      ],
+      "block": 0
+    },
+    {
+      "zone": "hall roof",
+      "from": [
+        4,
+        6,
+        22
+      ],
+      "to": [
+        18,
+        6,
+        38
+      ],
+      "block": 30
+    },
+    {
+      "zone": "hall ridge",
+      "from": [
+        8,
+        7,
+        26
+      ],
+      "to": [
+        14,
+        7,
+        34
+      ],
+      "block": 30
+    },
+    {
+      "zone": "teaching floor",
+      "from": [
+        47,
+        0,
+        23
+      ],
+      "to": [
+        59,
+        0,
+        37
+      ],
+      "block": 9
+    },
+    {
+      "zone": "teaching n",
+      "from": [
+        46,
+        1,
+        22
+      ],
+      "to": [
+        60,
+        4,
+        22
+      ],
+      "block": 12
+    },
+    {
+      "zone": "teaching s",
+      "from": [
+        46,
+        1,
+        38
+      ],
+      "to": [
+        60,
+        4,
+        38
+      ],
+      "block": 12
+    },
+    {
+      "zone": "teaching w",
+      "from": [
+        46,
+        1,
+        22
+      ],
+      "to": [
+        46,
+        4,
+        38
+      ],
+      "block": 12
+    },
+    {
+      "zone": "teaching e",
+      "from": [
+        60,
+        1,
+        22
+      ],
+      "to": [
+        60,
+        4,
+        38
+      ],
+      "block": 12
+    },
+    {
+      "zone": "teaching interior",
+      "from": [
+        47,
+        1,
+        23
+      ],
+      "to": [
+        59,
+        4,
+        37
+      ],
+      "block": 0
+    },
+    {
+      "zone": "teaching partition",
+      "from": [
+        47,
+        1,
+        30
+      ],
+      "to": [
+        59,
+        4,
+        30
+      ],
+      "block": 12
+    },
+    {
+      "zone": "teaching door p1",
+      "from": [
+        50,
+        1,
+        30
+      ],
+      "to": [
+        51,
+        2,
+        30
+      ],
+      "block": 0
+    },
+    {
+      "zone": "teaching door p2",
+      "from": [
+        55,
+        1,
+        30
+      ],
+      "to": [
+        56,
+        2,
+        30
+      ],
+      "block": 0
+    },
+    {
+      "zone": "teaching window s1",
+      "from": [
+        48,
+        2,
+        38
+      ],
+      "to": [
+        53,
+        3,
+        38
+      ],
+      "block": 22
+    },
+    {
+      "zone": "teaching window s2",
+      "from": [
+        56,
+        2,
+        38
+      ],
+      "to": [
+        58,
+        3,
+        38
+      ],
+      "block": 22
+    },
+    {
+      "zone": "teaching window n",
+      "from": [
+        48,
+        2,
+        22
+      ],
+      "to": [
+        58,
+        3,
+        22
+      ],
+      "block": 22
+    },
+    {
+      "zone": "teaching window w1",
+      "from": [
+        46,
+        2,
+        25
+      ],
+      "to": [
+        46,
+        3,
+        28
+      ],
+      "block": 22
+    },
+    {
+      "zone": "teaching window w2",
+      "from": [
+        46,
+        2,
+        33
+      ],
+      "to": [
+        46,
+        3,
+        36
+      ],
+      "block": 22
+    },
+    {
+      "zone": "teaching window e1",
+      "from": [
+        60,
+        2,
+        25
+      ],
+      "to": [
+        60,
+        3,
+        28
+      ],
+      "block": 22
+    },
+    {
+      "zone": "teaching window e2",
+      "from": [
+        60,
+        2,
+        33
+      ],
+      "to": [
+        60,
+        3,
+        36
+      ],
+      "block": 22
+    },
+    {
+      "zone": "teaching door w",
+      "from": [
+        46,
+        1,
+        29
+      ],
+      "to": [
+        46,
+        2,
+        31
+      ],
+      "block": 0
+    },
+    {
+      "zone": "teaching door s",
+      "from": [
+        52,
+        1,
+        38
+      ],
+      "to": [
+        54,
+        2,
+        38
+      ],
+      "block": 0
+    },
+    {
+      "zone": "teaching roof",
+      "from": [
+        46,
+        5,
+        22
+      ],
+      "to": [
+        60,
+        5,
+        38
+      ],
+      "block": 14
+    },
+    {
+      "zone": "teaching parapet n",
+      "from": [
+        46,
+        6,
+        22
+      ],
+      "to": [
+        60,
+        6,
+        22
+      ],
+      "block": 2
+    },
+    {
+      "zone": "teaching parapet s",
+      "from": [
+        46,
+        6,
+        38
+      ],
+      "to": [
+        60,
+        6,
+        38
+      ],
+      "block": 2
+    },
+    {
+      "zone": "teaching parapet w",
+      "from": [
+        46,
+        6,
+        22
+      ],
+      "to": [
+        46,
+        6,
+        38
+      ],
+      "block": 2
+    },
+    {
+      "zone": "teaching parapet e",
+      "from": [
+        60,
+        6,
+        22
+      ],
+      "to": [
+        60,
+        6,
+        38
+      ],
+      "block": 2
+    },
+    {
+      "zone": "red base floor",
+      "from": [
+        3,
+        0,
+        3
+      ],
+      "to": [
+        13,
+        0,
+        13
+      ],
+      "block": 7
+    },
+    {
+      "zone": "red base n",
+      "from": [
+        3,
+        1,
+        3
+      ],
+      "to": [
+        13,
+        3,
+        3
+      ],
+      "block": 2
+    },
+    {
+      "zone": "red base s",
+      "from": [
+        3,
+        1,
+        13
+      ],
+      "to": [
+        13,
+        3,
+        13
+      ],
+      "block": 2
+    },
+    {
+      "zone": "red base w",
+      "from": [
+        3,
+        1,
+        3
+      ],
+      "to": [
+        3,
+        3,
+        13
+      ],
+      "block": 2
+    },
+    {
+      "zone": "red base e",
+      "from": [
+        13,
+        1,
+        3
+      ],
+      "to": [
+        13,
+        3,
+        13
+      ],
+      "block": 2
+    },
+    {
+      "zone": "red base interior",
+      "from": [
+        4,
+        1,
+        4
+      ],
+      "to": [
+        12,
+        3,
+        12
+      ],
+      "block": 0
+    },
+    {
+      "zone": "red base gate e",
+      "from": [
+        13,
+        1,
+        7
+      ],
+      "to": [
+        13,
+        3,
+        9
+      ],
+      "block": 0
+    },
+    {
+      "zone": "red base gate s",
+      "from": [
+        7,
+        1,
+        13
+      ],
+      "to": [
+        9,
+        3,
+        13
+      ],
+      "block": 0
+    },
+    {
+      "zone": "red tower",
+      "from": [
+        3,
+        1,
+        3
+      ],
+      "to": [
+        5,
+        5,
+        5
+      ],
+      "block": 2
+    },
+    {
+      "zone": "red tower roof",
+      "from": [
+        3,
+        6,
+        3
+      ],
+      "to": [
+        5,
+        6,
+        5
+      ],
+      "block": 7
+    },
+    {
+      "zone": "red spawn pad",
       "from": [
         7,
         0,
@@ -677,160 +2077,6 @@
         9
       ],
       "block": 5
-    },
-    {
-      "zone": "red base wall east",
-      "from": [
-        12,
-        1,
-        4
-      ],
-      "to": [
-        12,
-        3,
-        12
-      ],
-      "block": 2
-    },
-    {
-      "zone": "red base wall south",
-      "from": [
-        4,
-        1,
-        12
-      ],
-      "to": [
-        12,
-        3,
-        12
-      ],
-      "block": 2
-    },
-    {
-      "zone": "red base gate east",
-      "from": [
-        12,
-        1,
-        8
-      ],
-      "to": [
-        12,
-        3,
-        10
-      ],
-      "block": 0
-    },
-    {
-      "zone": "red base gate south",
-      "from": [
-        8,
-        1,
-        12
-      ],
-      "to": [
-        10,
-        3,
-        12
-      ],
-      "block": 0
-    },
-    {
-      "zone": "blue base floor",
-      "from": [
-        51,
-        0,
-        51
-      ],
-      "to": [
-        59,
-        0,
-        59
-      ],
-      "block": 7
-    },
-    {
-      "zone": "blue base spawn pad",
-      "from": [
-        55,
-        0,
-        55
-      ],
-      "to": [
-        57,
-        0,
-        57
-      ],
-      "block": 5
-    },
-    {
-      "zone": "blue base wall west",
-      "from": [
-        51,
-        1,
-        51
-      ],
-      "to": [
-        51,
-        3,
-        59
-      ],
-      "block": 2
-    },
-    {
-      "zone": "blue base wall north",
-      "from": [
-        51,
-        1,
-        51
-      ],
-      "to": [
-        59,
-        3,
-        51
-      ],
-      "block": 2
-    },
-    {
-      "zone": "blue base gate west",
-      "from": [
-        51,
-        1,
-        54
-      ],
-      "to": [
-        51,
-        3,
-        56
-      ],
-      "block": 0
-    },
-    {
-      "zone": "blue base gate north",
-      "from": [
-        52,
-        1,
-        51
-      ],
-      "to": [
-        54,
-        3,
-        51
-      ],
-      "block": 0
-    },
-    {
-      "zone": "blue base interior air",
-      "from": [
-        52,
-        1,
-        52
-      ],
-      "to": [
-        59,
-        3,
-        59
-      ],
-      "block": 0
     },
     {
       "zone": "red bed",
@@ -847,6 +2093,160 @@
       "block": 6
     },
     {
+      "zone": "blue base floor",
+      "from": [
+        51,
+        0,
+        51
+      ],
+      "to": [
+        59,
+        0,
+        59
+      ],
+      "block": 7
+    },
+    {
+      "zone": "blue base n",
+      "from": [
+        51,
+        1,
+        51
+      ],
+      "to": [
+        59,
+        3,
+        51
+      ],
+      "block": 2
+    },
+    {
+      "zone": "blue base s",
+      "from": [
+        51,
+        1,
+        59
+      ],
+      "to": [
+        59,
+        3,
+        59
+      ],
+      "block": 2
+    },
+    {
+      "zone": "blue base w",
+      "from": [
+        51,
+        1,
+        51
+      ],
+      "to": [
+        51,
+        3,
+        59
+      ],
+      "block": 2
+    },
+    {
+      "zone": "blue base e",
+      "from": [
+        59,
+        1,
+        51
+      ],
+      "to": [
+        59,
+        3,
+        59
+      ],
+      "block": 2
+    },
+    {
+      "zone": "blue base interior",
+      "from": [
+        52,
+        1,
+        52
+      ],
+      "to": [
+        58,
+        3,
+        58
+      ],
+      "block": 0
+    },
+    {
+      "zone": "blue base gate w",
+      "from": [
+        51,
+        1,
+        53
+      ],
+      "to": [
+        51,
+        3,
+        55
+      ],
+      "block": 0
+    },
+    {
+      "zone": "blue base gate n",
+      "from": [
+        53,
+        1,
+        51
+      ],
+      "to": [
+        55,
+        3,
+        51
+      ],
+      "block": 0
+    },
+    {
+      "zone": "blue tower",
+      "from": [
+        57,
+        1,
+        57
+      ],
+      "to": [
+        59,
+        5,
+        59
+      ],
+      "block": 2
+    },
+    {
+      "zone": "blue tower roof",
+      "from": [
+        57,
+        6,
+        57
+      ],
+      "to": [
+        59,
+        6,
+        59
+      ],
+      "block": 7
+    },
+    {
+      "zone": "blue spawn pad",
+      "from": [
+        55,
+        0,
+        55
+      ],
+      "to": [
+        57,
+        0,
+        57
+      ],
+      "block": 5
+    },
+    {
       "zone": "blue bed",
       "from": [
         54,
@@ -861,63 +2261,1001 @@
       "block": 6
     },
     {
-      "zone": "border west",
+      "zone": "flag plaza",
       "from": [
+        30,
         0,
-        1,
-        0
+        56
       ],
       "to": [
+        34,
         0,
-        2,
-        63
+        60
       ],
-      "block": 2
+      "block": 5
     },
     {
-      "zone": "border east",
+      "zone": "flagpole",
       "from": [
-        63,
+        32,
         1,
-        0
+        57
       ],
       "to": [
-        63,
-        2,
-        63
+        32,
+        7,
+        57
       ],
-      "block": 2
+      "block": 3
     },
     {
-      "zone": "border north",
+      "zone": "bench",
       "from": [
-        0,
+        10,
         1,
-        0
+        46
       ],
       "to": [
-        63,
-        2,
-        0
+        12,
+        1,
+        46
       ],
-      "block": 2
+      "block": 3
     },
     {
-      "zone": "border south",
+      "zone": "bench",
       "from": [
-        0,
+        52,
         1,
+        46
+      ],
+      "to": [
+        54,
+        1,
+        46
+      ],
+      "block": 3
+    },
+    {
+      "zone": "bench",
+      "from": [
+        35,
+        1,
+        62
+      ],
+      "to": [
+        37,
+        1,
+        62
+      ],
+      "block": 3
+    },
+    {
+      "zone": "tree sw trunk",
+      "from": [
+        4,
+        1,
+        61
+      ],
+      "to": [
+        4,
+        3,
+        61
+      ],
+      "block": 3
+    },
+    {
+      "zone": "tree sw canopy",
+      "from": [
+        3,
+        4,
+        60
+      ],
+      "to": [
+        5,
+        4,
+        62
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree sw crown",
+      "from": [
+        4,
+        5,
+        61
+      ],
+      "to": [
+        4,
+        5,
+        61
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree sw crown n",
+      "from": [
+        4,
+        5,
+        60
+      ],
+      "to": [
+        4,
+        5,
+        60
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree sw crown s",
+      "from": [
+        4,
+        5,
+        62
+      ],
+      "to": [
+        4,
+        5,
+        62
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree sw crown w",
+      "from": [
+        3,
+        5,
+        61
+      ],
+      "to": [
+        3,
+        5,
+        61
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree sw crown e",
+      "from": [
+        5,
+        5,
+        61
+      ],
+      "to": [
+        5,
+        5,
+        61
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree se trunk",
+      "from": [
+        56,
+        1,
+        50
+      ],
+      "to": [
+        56,
+        3,
+        50
+      ],
+      "block": 3
+    },
+    {
+      "zone": "tree se canopy",
+      "from": [
+        55,
+        4,
+        49
+      ],
+      "to": [
+        57,
+        4,
+        51
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree se crown",
+      "from": [
+        56,
+        5,
+        50
+      ],
+      "to": [
+        56,
+        5,
+        50
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree se crown n",
+      "from": [
+        56,
+        5,
+        49
+      ],
+      "to": [
+        56,
+        5,
+        49
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree se crown s",
+      "from": [
+        56,
+        5,
+        51
+      ],
+      "to": [
+        56,
+        5,
+        51
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree se crown w",
+      "from": [
+        55,
+        5,
+        50
+      ],
+      "to": [
+        55,
+        5,
+        50
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree se crown e",
+      "from": [
+        57,
+        5,
+        50
+      ],
+      "to": [
+        57,
+        5,
+        50
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree s trunk",
+      "from": [
+        8,
+        1,
+        62
+      ],
+      "to": [
+        8,
+        3,
+        62
+      ],
+      "block": 3
+    },
+    {
+      "zone": "tree s canopy",
+      "from": [
+        7,
+        4,
+        61
+      ],
+      "to": [
+        9,
+        4,
+        63
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree s crown",
+      "from": [
+        8,
+        5,
+        62
+      ],
+      "to": [
+        8,
+        5,
+        62
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree s crown n",
+      "from": [
+        8,
+        5,
+        61
+      ],
+      "to": [
+        8,
+        5,
+        61
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree s crown s",
+      "from": [
+        8,
+        5,
         63
       ],
       "to": [
-        63,
-        2,
+        8,
+        5,
         63
       ],
-      "block": 2
+      "block": 19
+    },
+    {
+      "zone": "tree s crown w",
+      "from": [
+        7,
+        5,
+        62
+      ],
+      "to": [
+        7,
+        5,
+        62
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree s crown e",
+      "from": [
+        9,
+        5,
+        62
+      ],
+      "to": [
+        9,
+        5,
+        62
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree s2 trunk",
+      "from": [
+        56,
+        1,
+        62
+      ],
+      "to": [
+        56,
+        3,
+        62
+      ],
+      "block": 3
+    },
+    {
+      "zone": "tree s2 canopy",
+      "from": [
+        55,
+        4,
+        61
+      ],
+      "to": [
+        57,
+        4,
+        63
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree s2 crown",
+      "from": [
+        56,
+        5,
+        62
+      ],
+      "to": [
+        56,
+        5,
+        62
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree s2 crown n",
+      "from": [
+        56,
+        5,
+        61
+      ],
+      "to": [
+        56,
+        5,
+        61
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree s2 crown s",
+      "from": [
+        56,
+        5,
+        63
+      ],
+      "to": [
+        56,
+        5,
+        63
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree s2 crown w",
+      "from": [
+        55,
+        5,
+        62
+      ],
+      "to": [
+        55,
+        5,
+        62
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree s2 crown e",
+      "from": [
+        57,
+        5,
+        62
+      ],
+      "to": [
+        57,
+        5,
+        62
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree nw trunk",
+      "from": [
+        20,
+        1,
+        47
+      ],
+      "to": [
+        20,
+        3,
+        47
+      ],
+      "block": 3
+    },
+    {
+      "zone": "tree nw canopy",
+      "from": [
+        19,
+        4,
+        46
+      ],
+      "to": [
+        21,
+        4,
+        48
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree nw crown",
+      "from": [
+        20,
+        5,
+        47
+      ],
+      "to": [
+        20,
+        5,
+        47
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree nw crown n",
+      "from": [
+        20,
+        5,
+        46
+      ],
+      "to": [
+        20,
+        5,
+        46
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree nw crown s",
+      "from": [
+        20,
+        5,
+        48
+      ],
+      "to": [
+        20,
+        5,
+        48
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree nw crown w",
+      "from": [
+        19,
+        5,
+        47
+      ],
+      "to": [
+        19,
+        5,
+        47
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree nw crown e",
+      "from": [
+        21,
+        5,
+        47
+      ],
+      "to": [
+        21,
+        5,
+        47
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree ne trunk",
+      "from": [
+        44,
+        1,
+        47
+      ],
+      "to": [
+        44,
+        3,
+        47
+      ],
+      "block": 3
+    },
+    {
+      "zone": "tree ne canopy",
+      "from": [
+        43,
+        4,
+        46
+      ],
+      "to": [
+        45,
+        4,
+        48
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree ne crown",
+      "from": [
+        44,
+        5,
+        47
+      ],
+      "to": [
+        44,
+        5,
+        47
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree ne crown n",
+      "from": [
+        44,
+        5,
+        46
+      ],
+      "to": [
+        44,
+        5,
+        46
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree ne crown s",
+      "from": [
+        44,
+        5,
+        48
+      ],
+      "to": [
+        44,
+        5,
+        48
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree ne crown w",
+      "from": [
+        43,
+        5,
+        47
+      ],
+      "to": [
+        43,
+        5,
+        47
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree ne crown e",
+      "from": [
+        45,
+        5,
+        47
+      ],
+      "to": [
+        45,
+        5,
+        47
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree w trunk",
+      "from": [
+        12,
+        1,
+        20
+      ],
+      "to": [
+        12,
+        3,
+        20
+      ],
+      "block": 3
+    },
+    {
+      "zone": "tree w canopy",
+      "from": [
+        11,
+        4,
+        19
+      ],
+      "to": [
+        13,
+        4,
+        21
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree w crown",
+      "from": [
+        12,
+        5,
+        20
+      ],
+      "to": [
+        12,
+        5,
+        20
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree w crown n",
+      "from": [
+        12,
+        5,
+        19
+      ],
+      "to": [
+        12,
+        5,
+        19
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree w crown s",
+      "from": [
+        12,
+        5,
+        21
+      ],
+      "to": [
+        12,
+        5,
+        21
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree w crown w",
+      "from": [
+        11,
+        5,
+        20
+      ],
+      "to": [
+        11,
+        5,
+        20
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree w crown e",
+      "from": [
+        13,
+        5,
+        20
+      ],
+      "to": [
+        13,
+        5,
+        20
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree e trunk",
+      "from": [
+        46,
+        1,
+        20
+      ],
+      "to": [
+        46,
+        3,
+        20
+      ],
+      "block": 3
+    },
+    {
+      "zone": "tree e canopy",
+      "from": [
+        45,
+        4,
+        19
+      ],
+      "to": [
+        47,
+        4,
+        21
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree e crown",
+      "from": [
+        46,
+        5,
+        20
+      ],
+      "to": [
+        46,
+        5,
+        20
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree e crown n",
+      "from": [
+        46,
+        5,
+        19
+      ],
+      "to": [
+        46,
+        5,
+        19
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree e crown s",
+      "from": [
+        46,
+        5,
+        21
+      ],
+      "to": [
+        46,
+        5,
+        21
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree e crown w",
+      "from": [
+        45,
+        5,
+        20
+      ],
+      "to": [
+        45,
+        5,
+        20
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree e crown e",
+      "from": [
+        47,
+        5,
+        20
+      ],
+      "to": [
+        47,
+        5,
+        20
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree quad trunk",
+      "from": [
+        16,
+        1,
+        54
+      ],
+      "to": [
+        16,
+        3,
+        54
+      ],
+      "block": 3
+    },
+    {
+      "zone": "tree quad canopy",
+      "from": [
+        15,
+        4,
+        53
+      ],
+      "to": [
+        17,
+        4,
+        55
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree quad crown",
+      "from": [
+        16,
+        5,
+        54
+      ],
+      "to": [
+        16,
+        5,
+        54
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree quad crown n",
+      "from": [
+        16,
+        5,
+        53
+      ],
+      "to": [
+        16,
+        5,
+        53
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree quad crown s",
+      "from": [
+        16,
+        5,
+        55
+      ],
+      "to": [
+        16,
+        5,
+        55
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree quad crown w",
+      "from": [
+        15,
+        5,
+        54
+      ],
+      "to": [
+        15,
+        5,
+        54
+      ],
+      "block": 19
+    },
+    {
+      "zone": "tree quad crown e",
+      "from": [
+        17,
+        5,
+        54
+      ],
+      "to": [
+        17,
+        5,
+        54
+      ],
+      "block": 19
     }
   ],
   "spawns": {
+    "ffa": [
+      [
+        8,
+        1,
+        18
+      ],
+      [
+        24,
+        1,
+        20
+      ],
+      [
+        43,
+        1,
+        20
+      ],
+      [
+        33,
+        1,
+        44
+      ],
+      [
+        8,
+        1,
+        46
+      ],
+      [
+        56,
+        1,
+        46
+      ],
+      [
+        33,
+        1,
+        58
+      ],
+      [
+        56,
+        1,
+        2
+      ]
+    ],
     "red": [
       [
         8,
@@ -930,48 +3268,6 @@
         56,
         1,
         56
-      ]
-    ],
-    "ffa": [
-      [
-        33,
-        1,
-        20
-      ],
-      [
-        1,
-        2,
-        62
-      ],
-      [
-        62,
-        2,
-        62
-      ],
-      [
-        1,
-        1,
-        1
-      ],
-      [
-        62,
-        1,
-        1
-      ],
-      [
-        31,
-        3,
-        52
-      ],
-      [
-        3,
-        1,
-        31
-      ],
-      [
-        61,
-        1,
-        31
       ]
     ]
   },

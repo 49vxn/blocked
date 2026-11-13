@@ -3,7 +3,7 @@
 export type ClientMsg =
   | { t: "join"; v: 1; name: string; room: string; id?: string }
   | { t: "setup"; mode?: Mode; bots?: number } // host only, lobby only
-  | { t: "input"; seq: number; move: [number, number]; yaw: number; pitch: number; keys: number }
+  | { t: "input"; seq: number; move: [number, number]; yaw: number; pitch: number; keys: number; look?: boolean }
   | { t: "place"; x: number; y: number; z: number; block: number; face: number }
   | { t: "break"; x: number; y: number; z: number }
   | { t: "attack"; x: number; y: number; z: number } // a cell, resolved to a player or a bed

@@ -64,10 +64,10 @@ Rules:
 | Zone | What it offers | Threat, and when | How to play it |
 |---|---|---|---|
 | **Library** (centre) | Flat roof, tallest cover, mezzanine sightlines over the middle crossing | **Meteor 2:00** takes the roof — the best cover decays first (meteor is biased to the library, see `ENGINE.md`) | Fight here early. After 2:00 the centre is exposed; fall back and rotate |
-| **Quad** (south) | Flat and fast, no cover | **Flood 4:00** rises 4 blocks — movement crawls in it | Cross before 4:00. After, it is a blue killzone: go around, or accept a slow fight |
+| **Quad** (south) | Flat and fast; benches and trees at the edges, open centre | **Flood 4:00** rises 4 blocks — movement crawls in it | Cross before 4:00. After, it is a blue killzone: go around, or accept a slow fight |
 | **Science block** (north) | Tight corridors, the quiet flank into the blue base | **Earthquake 6:00** collapses the corridors, cutting the flank | Raid through it mid-round. Leave by 6:00 — after, it strands you |
 | **Bases** (NW, SE) | Bed, spawn pad, 3-high wall, indestructible floor — **bedwars only** | Never targeted directly; the earthquake can still land here | Bedwars: hold the wall. Once a bed dies there is no respawn — the endgame is fought here |
-| **Middle** (raised crossing) | The only fast route between bases | Every disaster reaches it eventually | The obvious fight 0:00–2:00. Whoever holds it dictates the rotation |
+| **Middle** (library crossing) | The only fast route between bases | Every disaster reaches it eventually | The obvious fight 0:00–2:00. Whoever holds it dictates the rotation |
 
 Read it as a minute-by-minute threat map: every zone is safe until one clock strikes.
 
@@ -133,10 +133,10 @@ every block, including the iron roof** — that is the meteor beat.
   12 blocks apart in `x`/`z` so nobody starts in a fight. Same rule as everything else: air at `y`
   and `y + 1` (head room), solid at `y − 1`. Validated in the shipped `arena.json`:
 
-  `[6,1,18]` `[22,2,18]` `[50,1,16]` `[5,1,30]` `[58,1,30]` `[14,2,55]` `[50,2,58]` `[32,2,60]`
+  `[8,1,18]` `[24,1,20]` `[43,1,20]` `[33,1,44]` `[8,1,46]` `[56,1,46]` `[33,1,58]` `[56,1,2]`
 
-  (West, north-west, north-east, west flank, east flank, and three on the quad slab — the quad is
-  the first zone to flood, so a third of the seats start where the water is going.)
+  (Two on each flank of the campus, two behind the science block, and two on the quad — the quad
+  is the first zone to flood, so a quarter of the seats start where the water is going.)
 - **Bedwars (secondary):** `spawns.red = [[8, 1, 8]]`, `spawns.blue = [[56, 1, 56]]`, beds at
   `[10, 1, 8]` and `[54, 1, 56]`, walls facing centre.
 - Spawn kit: sword, 32 wood. Survival adds **3 respawns' worth of nothing** — there are no
@@ -151,7 +151,7 @@ every block, including the iron roof** — that is the meteor beat.
 
 ## Building the map in 2 hours
 
-> **The arena already exists.** `client/arena.json` is a pre-built asset (decision #37): 61 fills,
+> **The arena already exists.** `client/arena.json` is a pre-built asset (decision #37): 229 fills,
 > size `[64, 32, 64]`, shell + carved interiors, validated spawns and beds. The steps below are the
 > **fallback** if that file fails QA — do not author the map from scratch by default.
 
