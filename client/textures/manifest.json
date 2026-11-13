@@ -1,0 +1,1564 @@
+{
+  "version": 5,
+  "tile_size": 16,
+  "face_order": [
+    "top",
+    "side",
+    "bottom"
+  ],
+  "face_rows": {
+    "top": 0,
+    "side": 1,
+    "bottom": 2
+  },
+  "protocol_face_rows": [
+    1,
+    1,
+    0,
+    2,
+    1,
+    1
+  ],
+  "atlas": {
+    "file": "atlas.png",
+    "width": 544,
+    "height": 48,
+    "columns": 34,
+    "rows": 3,
+    "block_columns": {
+      "1": 0,
+      "2": 1,
+      "3": 2,
+      "4": 3,
+      "5": 4,
+      "6": 5,
+      "7": 6,
+      "8": 7,
+      "9": 8,
+      "10": 9,
+      "11": 10,
+      "12": 11,
+      "13": 12,
+      "14": 13,
+      "15": 14,
+      "16": 15,
+      "17": 16,
+      "18": 17,
+      "19": 18,
+      "20": 19,
+      "21": 20,
+      "22": 21,
+      "23": 22,
+      "24": 23,
+      "25": 24,
+      "26": 25,
+      "27": 26,
+      "28": 27,
+      "29": 28,
+      "30": 29,
+      "31": 30,
+      "32": 31,
+      "33": 32,
+      "34": 33
+    },
+    "uv": {
+      "u0": "col/34",
+      "u1": "(col+1)/34",
+      "v0": "1-(row+1)/3",
+      "v1": "1-row/3"
+    }
+  },
+  "blocks": [
+    {
+      "id": 1,
+      "slug": "grass",
+      "name": "Grass",
+      "family": "terrain",
+      "column": 0,
+      "file": "tiles/01-grass.png",
+      "rect": {
+        "x": 0,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/01-grass-top.png",
+        "side": "tiles/01-grass.png",
+        "bottom": "tiles/01-grass-bottom.png"
+      },
+      "pattern": "grass",
+      "params": {
+        "blades": 20
+      },
+      "details": [],
+      "palette": {
+        "base": "#55703a",
+        "light": "#6b8a48",
+        "dark": "#45602e",
+        "mortar": "#a8b091",
+        "accent": "#0e1209",
+        "dirt": "#7a6a4a"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": true,
+      "note": "MAP.md id 1, frozen side: 20 blades, 3 dirt patches, darker bottom edge; top is blades only, bottom is dirt.",
+      "side_frozen_sha256": "2f81e90adde2e1c890a78913e7baf90beff31b7d0514bb6ae7633229e8cbfe13"
+    },
+    {
+      "id": 2,
+      "slug": "brick",
+      "name": "Brick",
+      "family": "masonry",
+      "column": 1,
+      "file": "tiles/02-brick.png",
+      "rect": {
+        "x": 16,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/02-brick-top.png",
+        "side": "tiles/02-brick.png",
+        "bottom": "tiles/02-brick-bottom.png"
+      },
+      "pattern": "brick",
+      "params": {
+        "spread": 0.06,
+        "chips": 0
+      },
+      "details": [],
+      "palette": {
+        "base": "#8e4a3a",
+        "light": "#af5b47",
+        "dark": "#633328",
+        "mortar": "#d8cfc0",
+        "accent": "#291511",
+        "chip": "#6a4a3e"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": true,
+      "note": "MAP.md id 2, frozen side: mortar every 4 px, alternating joints, per-brick +-6% lightness; top flat, bottom tighter.",
+      "side_frozen_sha256": "970cfbd8fdfda51f4a530cda6f31b0c839a95ed5189a31b0c4466a45c33940ad"
+    },
+    {
+      "id": 3,
+      "slug": "wood",
+      "name": "Wood",
+      "family": "carpentry",
+      "column": 2,
+      "file": "tiles/03-wood.png",
+      "rect": {
+        "x": 32,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/03-wood-top.png",
+        "side": "tiles/03-wood.png",
+        "bottom": "tiles/03-wood-bottom.png"
+      },
+      "pattern": "wood",
+      "params": {
+        "columns": [
+          1,
+          4,
+          6,
+          9,
+          11,
+          14
+        ],
+        "highlight": 12
+      },
+      "details": [],
+      "palette": {
+        "base": "#9c7048",
+        "light": "#b4875d",
+        "dark": "#725235",
+        "mortar": "#c8b097",
+        "accent": "#3a2a1b",
+        "grain": "#7a5535",
+        "highlight": "#b58a5e"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": true,
+      "note": "MAP.md id 3, frozen side: grain columns, 1-px breaks, one highlight; start/stop grain on top and bottom.",
+      "side_frozen_sha256": "ea4fdc293377e6123ba25760e4c27ceb82c034db557edf8363f033655ab5fc01"
+    },
+    {
+      "id": 4,
+      "slug": "glass",
+      "name": "Glass",
+      "family": "glazing",
+      "column": 3,
+      "file": "tiles/04-glass.png",
+      "rect": {
+        "x": 48,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/04-glass-top.png",
+        "side": "tiles/04-glass.png",
+        "bottom": "tiles/04-glass-bottom.png"
+      },
+      "pattern": "glass",
+      "params": {
+        "alpha": 204
+      },
+      "details": [],
+      "palette": {
+        "base": "#b8dbe8",
+        "light": "#dbedf3",
+        "dark": "#8ac4d9",
+        "mortar": "#d5e0df",
+        "accent": "#4ca4c5",
+        "frame": "#efe6d2"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": true,
+      "note": "MAP.md id 4, frozen side: 80% pane, 2-px frame, one 30% white diagonal; top keeps the pane, bottom is a solid back panel.",
+      "side_frozen_sha256": "502853932f0e0470a8873719988262719b860d0fbeac81755809ec8e3adbbc91"
+    },
+    {
+      "id": 5,
+      "slug": "concrete",
+      "name": "Concrete",
+      "family": "concrete",
+      "column": 4,
+      "file": "tiles/05-concrete.png",
+      "rect": {
+        "x": 64,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/05-concrete-top.png",
+        "side": "tiles/05-concrete.png",
+        "bottom": "tiles/05-concrete-bottom.png"
+      },
+      "pattern": "concrete",
+      "params": {
+        "speckles": 14,
+        "joints": [
+          4,
+          12
+        ]
+      },
+      "details": [],
+      "palette": {
+        "base": "#b9bcbe",
+        "light": "#d1d3d4",
+        "dark": "#999ea1",
+        "mortar": "#d5d3cc",
+        "accent": "#707578",
+        "speckle": "#a6a9ab",
+        "joint": "#9fa2a4"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": true,
+      "note": "MAP.md id 5, frozen side: 14 speckles, joints at 4/12; top is a joint-free slab, bottom is a plain soffit.",
+      "side_frozen_sha256": "5a3c1554e6617383dc9bd71c8f934a14a9acabbcd6c6e5cf7e7c9df96d92f2cd"
+    },
+    {
+      "id": 6,
+      "slug": "bed",
+      "name": "Bed (red)",
+      "family": "objective",
+      "column": 5,
+      "file": "tiles/06-bed.png",
+      "rect": {
+        "x": 80,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/06-bed-top.png",
+        "side": "tiles/06-bed.png",
+        "bottom": "tiles/06-bed-bottom.png"
+      },
+      "pattern": "bed",
+      "params": {},
+      "details": [],
+      "palette": {
+        "base": "#b5342f",
+        "light": "#ce4944",
+        "dark": "#842622",
+        "mortar": "#d3958c",
+        "accent": "#441312",
+        "frame": "#4a3a2e",
+        "pillow": "#e8e4da"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": true,
+      "note": "MAP.md id 6, frozen side: red wool, 3-row pillow, 1-px frame; top repeats it without a rim, bottom is the wooden base.",
+      "side_frozen_sha256": "73e14aa5659f97972e094ab61ec37398dc2a9a16fd7297381530cff74c0a2fe9"
+    },
+    {
+      "id": 7,
+      "slug": "iron",
+      "name": "Iron",
+      "family": "metal",
+      "column": 6,
+      "file": "tiles/07-iron.png",
+      "rect": {
+        "x": 96,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/07-iron-top.png",
+        "side": "tiles/07-iron.png",
+        "bottom": "tiles/07-iron-bottom.png"
+      },
+      "pattern": "iron",
+      "params": {},
+      "details": [],
+      "palette": {
+        "base": "#2e3236",
+        "light": "#383d42",
+        "dark": "#26292d",
+        "mortar": "#96948f",
+        "accent": "#000000",
+        "top": "#4a5055"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": true,
+      "note": "MAP.md id 7, frozen side: corrugation at x%4 1/3, top highlight; roof tops are sheet, not corrugation.",
+      "side_frozen_sha256": "6eeea092a54e54c90a7d907fa7d948741bcfc25b767a8ec4971bcee27671781f"
+    },
+    {
+      "id": 8,
+      "slug": "water",
+      "name": "Water",
+      "family": "liquid",
+      "column": 7,
+      "file": "tiles/08-water.png",
+      "rect": {
+        "x": 112,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/08-water-top.png",
+        "side": "tiles/08-water.png",
+        "bottom": "tiles/08-water-bottom.png"
+      },
+      "pattern": "water",
+      "params": {
+        "alpha": 179,
+        "dashes": [
+          [
+            2,
+            6,
+            3
+          ],
+          [
+            8,
+            5,
+            2
+          ],
+          [
+            11,
+            9,
+            3
+          ],
+          [
+            4,
+            11,
+            2
+          ],
+          [
+            9,
+            13,
+            3
+          ]
+        ]
+      },
+      "details": [],
+      "palette": {
+        "base": "#3f76c9",
+        "light": "#6390d3",
+        "dark": "#2d5a9e",
+        "mortar": "#9eb3d1",
+        "accent": "#1b365f",
+        "surface": "#a8d4ee",
+        "dash": "#5a8fd6"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": true,
+      "note": "MAP.md id 8, frozen side: 70% alpha; top is the opaque surface, bottom is depth-faded body.",
+      "side_frozen_sha256": "39041563b1fb145326efedc526825217bfca8489a1babc1b0aea2f013e14afc1"
+    },
+    {
+      "id": 9,
+      "slug": "stone",
+      "name": "Stone",
+      "family": "masonry",
+      "column": 8,
+      "file": "tiles/09-stone.png",
+      "rect": {
+        "x": 128,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/09-stone.png",
+        "side": "tiles/09-stone.png",
+        "bottom": "tiles/09-stone.png"
+      },
+      "pattern": "ashlar",
+      "params": {},
+      "details": [],
+      "palette": {
+        "base": "#8f8c84",
+        "light": "#a5a29c",
+        "dark": "#706d66",
+        "mortar": "#c2bcae",
+        "accent": "#6f6c66"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "Two 7-px ashlar courses with 1-px mortar; large blocks read at distance."
+    },
+    {
+      "id": 10,
+      "slug": "stone-cracked",
+      "name": "Stone (cracked)",
+      "family": "masonry",
+      "column": 9,
+      "file": "tiles/10-stone-cracked.png",
+      "rect": {
+        "x": 144,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/10-stone-cracked.png",
+        "side": "tiles/10-stone-cracked.png",
+        "bottom": "tiles/10-stone-cracked.png"
+      },
+      "pattern": "ashlar",
+      "params": {},
+      "details": [
+        {
+          "name": "cracks",
+          "params": {
+            "n": 2,
+            "branches": 1
+          }
+        }
+      ],
+      "palette": {
+        "base": "#8f8c84",
+        "light": "#a5a29c",
+        "dark": "#706d66",
+        "mortar": "#c2bcae",
+        "accent": "#6f6c66"
+      },
+      "variant": "cracked",
+      "variant_of": 9,
+      "legacy": false,
+      "note": "Worn state: two hairlines plus a branch, no palette change."
+    },
+    {
+      "id": 11,
+      "slug": "stone-mossy",
+      "name": "Stone (mossy)",
+      "family": "masonry",
+      "column": 10,
+      "file": "tiles/11-stone-mossy.png",
+      "rect": {
+        "x": 160,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/11-stone-mossy.png",
+        "side": "tiles/11-stone-mossy.png",
+        "bottom": "tiles/11-stone-mossy.png"
+      },
+      "pattern": "ashlar",
+      "params": {},
+      "details": [
+        {
+          "name": "moss",
+          "params": {
+            "base": 1,
+            "extra": [
+              3,
+              4,
+              11,
+              12
+            ],
+            "spots": 4
+          }
+        }
+      ],
+      "palette": {
+        "base": "#8f8c84",
+        "light": "#a5a29c",
+        "dark": "#706d66",
+        "mortar": "#c2bcae",
+        "accent": "#6f6c66",
+        "moss": "#4e6b3a",
+        "moss_dark": "#3d5730"
+      },
+      "variant": "mossy",
+      "variant_of": 9,
+      "legacy": false,
+      "note": "Green skirt 1-3 px up the bottom edge, plus spatter."
+    },
+    {
+      "id": 12,
+      "slug": "plaster",
+      "name": "Plaster",
+      "family": "wall",
+      "column": 11,
+      "file": "tiles/12-plaster.png",
+      "rect": {
+        "x": 176,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/12-plaster.png",
+        "side": "tiles/12-plaster.png",
+        "bottom": "tiles/12-plaster.png"
+      },
+      "pattern": "plaster",
+      "params": {
+        "blotches": 7
+      },
+      "details": [],
+      "palette": {
+        "base": "#e4dccb",
+        "light": "#f4f0e9",
+        "dark": "#cfc1a3",
+        "mortar": "#e8e1d2",
+        "accent": "#b39d6d"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "Cream render with soft two-tone blotches; no strong lines."
+    },
+    {
+      "id": 13,
+      "slug": "plaster-dirty",
+      "name": "Plaster (dirty)",
+      "family": "wall",
+      "column": 12,
+      "file": "tiles/13-plaster-dirty.png",
+      "rect": {
+        "x": 192,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/13-plaster-dirty.png",
+        "side": "tiles/13-plaster-dirty.png",
+        "bottom": "tiles/13-plaster-dirty.png"
+      },
+      "pattern": "plaster",
+      "params": {
+        "blotches": 7
+      },
+      "details": [
+        {
+          "name": "grime",
+          "params": {
+            "n": 16
+          }
+        }
+      ],
+      "palette": {
+        "base": "#e4dccb",
+        "light": "#f4f0e9",
+        "dark": "#cfc1a3",
+        "mortar": "#e8e1d2",
+        "accent": "#b39d6d"
+      },
+      "variant": "dirty",
+      "variant_of": 12,
+      "legacy": false,
+      "note": "Same render plus grime speckle; variant inherits the base palette."
+    },
+    {
+      "id": 14,
+      "slug": "roof-slate",
+      "name": "Roof (slate)",
+      "family": "roof",
+      "column": 13,
+      "file": "tiles/14-roof-slate.png",
+      "rect": {
+        "x": 208,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/14-roof-slate.png",
+        "side": "tiles/14-roof-slate.png",
+        "bottom": "tiles/14-roof-slate.png"
+      },
+      "pattern": "shingle",
+      "params": {},
+      "details": [],
+      "palette": {
+        "base": "#3b4147",
+        "light": "#4a525a",
+        "dark": "#2a2f34",
+        "mortar": "#9c9b97",
+        "accent": "#000000"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "Four shingle courses, staggered tabs, lit top row per course."
+    },
+    {
+      "id": 15,
+      "slug": "roof-worn",
+      "name": "Roof (worn)",
+      "family": "roof",
+      "column": 14,
+      "file": "tiles/15-roof-worn.png",
+      "rect": {
+        "x": 224,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/15-roof-worn.png",
+        "side": "tiles/15-roof-worn.png",
+        "bottom": "tiles/15-roof-worn.png"
+      },
+      "pattern": "shingle",
+      "params": {},
+      "details": [
+        {
+          "name": "streaks",
+          "params": {
+            "n": 3
+          }
+        }
+      ],
+      "palette": {
+        "base": "#3b4147",
+        "light": "#4a525a",
+        "dark": "#2a2f34",
+        "mortar": "#9c9b97",
+        "accent": "#000000"
+      },
+      "variant": "worn",
+      "variant_of": 14,
+      "legacy": false,
+      "note": "Slate plus vertical weather streaks."
+    },
+    {
+      "id": 16,
+      "slug": "door",
+      "name": "Door",
+      "family": "carpentry",
+      "column": 15,
+      "file": "tiles/16-door.png",
+      "rect": {
+        "x": 240,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/16-door.png",
+        "side": "tiles/16-door.png",
+        "bottom": "tiles/16-door.png"
+      },
+      "pattern": "planks",
+      "params": {
+        "step": 4
+      },
+      "details": [
+        {
+          "name": "rivets",
+          "params": {}
+        }
+      ],
+      "palette": {
+        "base": "#6b4a2f",
+        "light": "#8a6543",
+        "dark": "#4a3320",
+        "mortar": "#b29f8c",
+        "accent": "#2f2a24"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "Vertical boards, 4-px pitch, four dark hinge dots."
+    },
+    {
+      "id": 17,
+      "slug": "pavers",
+      "name": "Pavers",
+      "family": "ground",
+      "column": 16,
+      "file": "tiles/17-pavers.png",
+      "rect": {
+        "x": 256,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/17-pavers.png",
+        "side": "tiles/17-pavers.png",
+        "bottom": "tiles/17-pavers.png"
+      },
+      "pattern": "pavers",
+      "params": {},
+      "details": [],
+      "palette": {
+        "base": "#9a958b",
+        "light": "#afaba4",
+        "dark": "#7c776c",
+        "mortar": "#b7b1a5",
+        "accent": "#504d46"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "4x4 grid of 3-px pavers with 1-px grout."
+    },
+    {
+      "id": 18,
+      "slug": "pavers-wet",
+      "name": "Pavers (wet)",
+      "family": "ground",
+      "column": 17,
+      "file": "tiles/18-pavers-wet.png",
+      "rect": {
+        "x": 272,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/18-pavers-wet.png",
+        "side": "tiles/18-pavers-wet.png",
+        "bottom": "tiles/18-pavers-wet.png"
+      },
+      "pattern": "pavers",
+      "params": {},
+      "details": [
+        {
+          "name": "wear",
+          "params": {
+            "n": 8
+          }
+        }
+      ],
+      "palette": {
+        "base": "#7d7a73",
+        "light": "#94918a",
+        "dark": "#5d5b56",
+        "mortar": "#8f8a80",
+        "accent": "#504d46"
+      },
+      "variant": "wet",
+      "variant_of": 17,
+      "legacy": false,
+      "note": "Darker palette, light flecks as standing water."
+    },
+    {
+      "id": 19,
+      "slug": "hedge",
+      "name": "Hedge",
+      "family": "foliage",
+      "column": 18,
+      "file": "tiles/19-hedge.png",
+      "rect": {
+        "x": 288,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/19-hedge.png",
+        "side": "tiles/19-hedge.png",
+        "bottom": "tiles/19-hedge.png"
+      },
+      "pattern": "foliage",
+      "params": {},
+      "details": [],
+      "palette": {
+        "base": "#3f5c33",
+        "light": "#557a43",
+        "dark": "#2c4224",
+        "mortar": "#9ea78e",
+        "accent": "#6b8a4a"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "Dense leaf speckle over a dark core; no flat gaps."
+    },
+    {
+      "id": 20,
+      "slug": "steel",
+      "name": "Steel panel",
+      "family": "metal",
+      "column": 19,
+      "file": "tiles/20-steel.png",
+      "rect": {
+        "x": 304,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/20-steel.png",
+        "side": "tiles/20-steel.png",
+        "bottom": "tiles/20-steel.png"
+      },
+      "pattern": "panel",
+      "params": {},
+      "details": [
+        {
+          "name": "rivets",
+          "params": {}
+        }
+      ],
+      "palette": {
+        "base": "#6d7378",
+        "light": "#868d93",
+        "dark": "#4f555a",
+        "mortar": "#b3b2ad",
+        "accent": "#2e3236"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "Brushed vertical stripes, edge shadow, four rivets."
+    },
+    {
+      "id": 21,
+      "slug": "steel-rusted",
+      "name": "Steel (rusted)",
+      "family": "metal",
+      "column": 20,
+      "file": "tiles/21-steel-rusted.png",
+      "rect": {
+        "x": 320,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/21-steel-rusted.png",
+        "side": "tiles/21-steel-rusted.png",
+        "bottom": "tiles/21-steel-rusted.png"
+      },
+      "pattern": "panel",
+      "params": {},
+      "details": [
+        {
+          "name": "rivets",
+          "params": {}
+        },
+        {
+          "name": "rust",
+          "params": {
+            "n": 12
+          }
+        }
+      ],
+      "palette": {
+        "base": "#6d7378",
+        "light": "#868d93",
+        "dark": "#4f555a",
+        "mortar": "#b3b2ad",
+        "accent": "#2e3236"
+      },
+      "variant": "rusted",
+      "variant_of": 20,
+      "legacy": false,
+      "note": "Panel plus rust clusters; inherits the steel palette."
+    },
+    {
+      "id": 22,
+      "slug": "glass-green",
+      "name": "Glass (green)",
+      "family": "glazing",
+      "column": 21,
+      "file": "tiles/22-glass-green.png",
+      "rect": {
+        "x": 336,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/22-glass-green.png",
+        "side": "tiles/22-glass-green.png",
+        "bottom": "tiles/22-glass-green.png"
+      },
+      "pattern": "glass",
+      "params": {
+        "alpha": 204
+      },
+      "details": [],
+      "palette": {
+        "base": "#9fc7b4",
+        "light": "#bcd8cb",
+        "dark": "#78b096",
+        "mortar": "#c9d8c8",
+        "accent": "#4f886d",
+        "frame": "#efe6d2"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "Science-block green tint; same frame/glare rule as id 4; faces repeat the side."
+    },
+    {
+      "id": 23,
+      "slug": "glass-dark",
+      "name": "Glass (dark)",
+      "family": "glazing",
+      "column": 22,
+      "file": "tiles/23-glass-dark.png",
+      "rect": {
+        "x": 352,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/23-glass-dark.png",
+        "side": "tiles/23-glass-dark.png",
+        "bottom": "tiles/23-glass-dark.png"
+      },
+      "pattern": "glass",
+      "params": {
+        "alpha": 220
+      },
+      "details": [],
+      "palette": {
+        "base": "#5b6b78",
+        "light": "#6f8292",
+        "dark": "#414c55",
+        "mortar": "#abaead",
+        "accent": "#1d2327",
+        "frame": "#3a3d42"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "Charcoal tint for Tower/teaching glazing; faces repeat the side."
+    },
+    {
+      "id": 24,
+      "slug": "carpet",
+      "name": "Carpet",
+      "family": "interior",
+      "column": 23,
+      "file": "tiles/24-carpet.png",
+      "rect": {
+        "x": 368,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/24-carpet.png",
+        "side": "tiles/24-carpet.png",
+        "bottom": "tiles/24-carpet.png"
+      },
+      "pattern": "carpet",
+      "params": {},
+      "details": [],
+      "palette": {
+        "base": "#5a5148",
+        "light": "#6d6358",
+        "dark": "#4a423a",
+        "mortar": "#aaa297",
+        "accent": "#0b0a09"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "Library floor: 55 flecks and one subtle seam."
+    },
+    {
+      "id": 25,
+      "slug": "shelf",
+      "name": "Shelves",
+      "family": "interior",
+      "column": 24,
+      "file": "tiles/25-shelf.png",
+      "rect": {
+        "x": 384,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/25-shelf.png",
+        "side": "tiles/25-shelf.png",
+        "bottom": "tiles/25-shelf.png"
+      },
+      "pattern": "shelf",
+      "params": {},
+      "details": [],
+      "palette": {
+        "base": "#7a5535",
+        "light": "#b58a5e",
+        "dark": "#4f3722",
+        "mortar": "#b9a48f",
+        "accent": "#16100a",
+        "shelf": "#4a3320",
+        "books": [
+          "#8e4a3a",
+          "#2f5fb3",
+          "#c9a227",
+          "#4e6b3a"
+        ]
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "Two shelf boards with colour-blocked spines between; library landmark."
+    },
+    {
+      "id": 26,
+      "slug": "court",
+      "name": "Court",
+      "family": "sport",
+      "column": 25,
+      "file": "tiles/26-court.png",
+      "rect": {
+        "x": 400,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/26-court.png",
+        "side": "tiles/26-court.png",
+        "bottom": "tiles/26-court.png"
+      },
+      "pattern": "court",
+      "params": {},
+      "details": [],
+      "palette": {
+        "base": "#2f6fa8",
+        "light": "#3c87c9",
+        "dark": "#245a8a",
+        "mortar": "#97b0c2",
+        "accent": "#102538",
+        "line": "#e8e4da"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "Blue court with an 2-px painted line and scuffs."
+    },
+    {
+      "id": 27,
+      "slug": "turf",
+      "name": "Turf",
+      "family": "sport",
+      "column": 26,
+      "file": "tiles/27-turf.png",
+      "rect": {
+        "x": 416,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/27-turf.png",
+        "side": "tiles/27-turf.png",
+        "bottom": "tiles/27-turf.png"
+      },
+      "pattern": "turf",
+      "params": {},
+      "details": [],
+      "palette": {
+        "base": "#4f7038",
+        "light": "#6b8a48",
+        "dark": "#324724",
+        "mortar": "#a5b090",
+        "accent": "#0c1108",
+        "stripe": "#557a3d"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "Mowing stripes every 4 px; reads as field at distance."
+    },
+    {
+      "id": 28,
+      "slug": "gravel",
+      "name": "Gravel",
+      "family": "ground",
+      "column": 27,
+      "file": "tiles/28-gravel.png",
+      "rect": {
+        "x": 432,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/28-gravel.png",
+        "side": "tiles/28-gravel.png",
+        "bottom": "tiles/28-gravel.png"
+      },
+      "pattern": "gravel",
+      "params": {},
+      "details": [],
+      "palette": {
+        "base": "#a89f90",
+        "light": "#bdb3a2",
+        "dark": "#8a8174",
+        "mortar": "#cdc6b8",
+        "accent": "#5f574a"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "Dense fine speckle with a few 2-px stones."
+    },
+    {
+      "id": 29,
+      "slug": "blackboard",
+      "name": "Blackboard",
+      "family": "interior",
+      "column": 28,
+      "file": "tiles/29-blackboard.png",
+      "rect": {
+        "x": 448,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/29-blackboard.png",
+        "side": "tiles/29-blackboard.png",
+        "bottom": "tiles/29-blackboard.png"
+      },
+      "pattern": "chalkboard",
+      "params": {},
+      "details": [],
+      "palette": {
+        "base": "#26332c",
+        "light": "#3a4d43",
+        "dark": "#0c100e",
+        "mortar": "#93958b",
+        "accent": "#000000",
+        "frame": "#6b4a2f",
+        "chalk": "#d8d4c8"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "Dark board, wood frame, two chalk dashes."
+    },
+    {
+      "id": 30,
+      "slug": "roof-terracotta",
+      "name": "Roof (terracotta)",
+      "family": "roof",
+      "column": 29,
+      "file": "tiles/30-roof-terracotta.png",
+      "rect": {
+        "x": 464,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/30-roof-terracotta.png",
+        "side": "tiles/30-roof-terracotta.png",
+        "bottom": "tiles/30-roof-terracotta.png"
+      },
+      "pattern": "pavers",
+      "params": {},
+      "details": [],
+      "palette": {
+        "base": "#a9543f",
+        "light": "#bd6a52",
+        "dark": "#8a3f2f",
+        "mortar": "#c9b5a4",
+        "accent": "#412018"
+      },
+      "variant": null,
+      "variant_of": null,
+      "legacy": false,
+      "note": "Warm 4x4 clay tiles; alt roof for Firth Hall/terraces."
+    },
+    {
+      "id": 31,
+      "slug": "brick-aged",
+      "name": "Brick (aged)",
+      "family": "masonry",
+      "column": 30,
+      "file": "tiles/31-brick-aged.png",
+      "rect": {
+        "x": 480,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/31-brick-aged.png",
+        "side": "tiles/31-brick-aged.png",
+        "bottom": "tiles/31-brick-aged.png"
+      },
+      "pattern": "brick",
+      "params": {
+        "spread": 0.04,
+        "chips": 9
+      },
+      "details": [],
+      "palette": {
+        "base": "#7d5a4c",
+        "light": "#9a6f5d",
+        "dark": "#573f35",
+        "mortar": "#cfc6b6",
+        "accent": "#291511",
+        "chip": "#6a4a3e"
+      },
+      "variant": "aged",
+      "variant_of": 2,
+      "legacy": false,
+      "note": "Faded palette, +-4% bricks, nine chipped faces; also variants/brick-aged.png."
+    },
+    {
+      "id": 32,
+      "slug": "brick-mossy",
+      "name": "Brick (mossy)",
+      "family": "masonry",
+      "column": 31,
+      "file": "tiles/32-brick-mossy.png",
+      "rect": {
+        "x": 496,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/32-brick-mossy.png",
+        "side": "tiles/32-brick-mossy.png",
+        "bottom": "tiles/32-brick-mossy.png"
+      },
+      "pattern": "brick",
+      "params": {
+        "spread": 0.06,
+        "chips": 0
+      },
+      "details": [
+        {
+          "name": "moss",
+          "params": {
+            "base": 1,
+            "extra": [
+              3,
+              4,
+              11,
+              12
+            ],
+            "spots": 5
+          }
+        }
+      ],
+      "palette": {
+        "base": "#8e4a3a",
+        "light": "#af5b47",
+        "dark": "#633328",
+        "mortar": "#d8cfc0",
+        "accent": "#291511",
+        "chip": "#6a4a3e",
+        "moss": "#4e6b3a",
+        "moss_dark": "#3d5730"
+      },
+      "variant": "mossy",
+      "variant_of": 2,
+      "legacy": false,
+      "note": "Moss skirt up the bottom edge; also variants/brick-mossy.png."
+    },
+    {
+      "id": 33,
+      "slug": "brick-gold",
+      "name": "Brick (gold cap)",
+      "family": "masonry",
+      "column": 32,
+      "file": "tiles/33-brick-gold.png",
+      "rect": {
+        "x": 512,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/33-brick-gold.png",
+        "side": "tiles/33-brick-gold.png",
+        "bottom": "tiles/33-brick-gold.png"
+      },
+      "pattern": "brick",
+      "params": {
+        "spread": 0.06,
+        "chips": 0
+      },
+      "details": [
+        {
+          "name": "cap",
+          "params": {
+            "rows": 2
+          }
+        }
+      ],
+      "palette": {
+        "base": "#8e4a3a",
+        "light": "#af5b47",
+        "dark": "#633328",
+        "mortar": "#d8cfc0",
+        "accent": "#291511",
+        "chip": "#6a4a3e",
+        "cap": "#c9a227"
+      },
+      "variant": "gold",
+      "variant_of": 2,
+      "legacy": false,
+      "note": "2-px gold cap for wall tops; also variants/brick-gold.png."
+    },
+    {
+      "id": 34,
+      "slug": "bed-blue",
+      "name": "Bed (blue)",
+      "family": "objective",
+      "column": 33,
+      "file": "tiles/34-bed-blue.png",
+      "rect": {
+        "x": 528,
+        "y": 16,
+        "w": 16,
+        "h": 16
+      },
+      "faces": {
+        "top": 0,
+        "side": 1,
+        "bottom": 2
+      },
+      "face_files": {
+        "top": "tiles/34-bed-blue-top.png",
+        "side": "tiles/34-bed-blue.png",
+        "bottom": "tiles/34-bed-blue-bottom.png"
+      },
+      "pattern": "bed",
+      "params": {},
+      "details": [],
+      "palette": {
+        "base": "#2f5fb3",
+        "light": "#4275cd",
+        "dark": "#224583",
+        "mortar": "#d3958c",
+        "accent": "#441312",
+        "frame": "#4a3a2e",
+        "pillow": "#e8e4da"
+      },
+      "variant": "blue",
+      "variant_of": 6,
+      "legacy": false,
+      "note": "Blue objective for contract column 8; also a standalone extra texture."
+    }
+  ]
+}

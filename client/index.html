@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blocked</title>
+<style>
+  :root { --gold: #ffd700; }
+  * { margin: 0; box-sizing: border-box; }
+  body { background: #111418; color: #eee; font-family: ui-monospace, monospace;
+         display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+  canvas { image-rendering: pixelated; border: 1px solid #2a2f36; margin-top: 12px; }
+  #status { color: var(--gold); font-size: 12px; margin-top: 8px; }
+  .overlay { position: fixed; inset: 0; background: #111418ee;
+             display: flex; align-items: center; justify-content: center; }
+  .card { text-align: center; border: 1px solid var(--gold); padding: 32px 40px; background: #171b21; }
+  .card h1 { color: var(--gold); letter-spacing: 4px; }
+  .card p { color: #9aa3ad; margin: 8px 0 20px; }
+  input { background: #0d0f12; border: 1px solid #2a2f36; color: #eee;
+          padding: 8px 10px; font: inherit; width: 180px; }
+  button { background: var(--gold); border: 0; color: #111; font: inherit;
+           font-weight: 700; padding: 8px 20px; margin-left: 8px; cursor: pointer; }
+</style>
+</head>
+<body>
+<canvas id="c" width="640" height="640"></canvas>
+<div id="status">connecting…</div>
+<div id="join" class="overlay">
+  <div class="card">
+    <h1>BLOCKED</h1>
+    <p>our school. your survival.</p>
+    <input id="name" maxlength="16" placeholder="name" autocomplete="off">
+    <button id="play">Play</button>
+  </div>
+</div>
+<script type="module" src="/main.ts"></script>
+</body>
+</html>
