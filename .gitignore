@@ -3,5 +3,7 @@ dist/
 *.log
 .env
 captures/
-# viewer/ is local-only creative tooling (it hardcodes the staging assets path).
+# viewer/ and mapper/ are local-only creative tooling (viewer hardcodes the staging assets
+# path; mapper is WIP until its owner declares it ready).
 viewer/
+mapper/
