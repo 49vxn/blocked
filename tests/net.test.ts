@@ -23,6 +23,23 @@ test("prediction walks the body forward at walking speed", () => {
 	expect(4 - body.body.z).toBeLessThan(4.6);
 });
 
+test("the camera interpolates between simulation ticks", () => {
+	const body = new LocalBody(4, 1.05, 4, 0, floorWorld());
+	for (let i = 0; i < 9; i++) body.step({ forward: 1, strafe: 0, jump: false, sprint: false }, 50, 1000 + i * 50);
+	const beforeLast = body.body.z;
+	body.step({ forward: 1, strafe: 0, jump: false, sprint: false }, 50, 1450);
+	const after = body.body.z;
+	// Fixed-step interpolation draws one tick behind: at the tick boundary it is the previous
+	// position, halfway through it is between, and one tick later it has caught up.
+	const tickStart = body.sample(1450).z;
+	const half = body.sample(1475).z;
+	const tickEnd = body.sample(1500).z;
+	expect(tickStart).toBeCloseTo(beforeLast, 5);
+	expect(half).toBeLessThan(beforeLast);
+	expect(half).toBeGreaterThan(after);
+	expect(tickEnd).toBeCloseTo(after, 5);
+});
+
 test("a small correction eases, so the view does not jitter", () => {
 	const body = new LocalBody(4, 1.05, 4, 0, floorWorld());
 	body.reconcile(4.2, 1.05, 4);

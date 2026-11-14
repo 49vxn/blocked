@@ -13,6 +13,7 @@ import {
 	MeshBasicMaterial,
 	Vector3,
 } from "three";
+import { EYE_HEIGHT } from "../shared/constants";
 import { buildWorld } from "./engine/arena";
 import { raycast } from "./engine/raycast";
 import { LocalBody, RemotePlayers } from "./net";
@@ -234,7 +235,11 @@ function frame(): void {
 
 	if (view) {
 		const cam = view.camera;
-		if (body) cam.position.set(body.body.x, body.eyeY, body.body.z);
+		if (body) {
+			// Draw between the last two sim ticks: the body steps at 20 Hz, the screen at 60+.
+			const at = body.sample(now);
+			cam.position.set(at.x, at.y + EYE_HEIGHT, at.z);
+		}
 		cam.rotation.set(pitch, yaw, 0, "YXZ");
 
 		drawEntities(remote.sample(Date.now()));

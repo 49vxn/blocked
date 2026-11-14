@@ -27,6 +27,9 @@ export function collisionWorld(world: World): (x: number, y: number, z: number) 
 export class LocalBody {
 	readonly body: Body;
 	private accumulator = 0;
+	/** Position before the last simulated tick, so frames between ticks can be interpolated. */
+	private readonly previous = { x: 0, y: 0, z: 0 };
+	private steppedAt = 0;
 
 	constructor(
 		x: number,
@@ -36,6 +39,9 @@ export class LocalBody {
 		private readonly world: World,
 	) {
 		this.body = { x, y, z, vx: 0, vy: 0, vz: 0, yaw, onGround: false };
+		this.previous.x = x;
+		this.previous.y = y;
+		this.previous.z = z;
 	}
 
 	get eyeY(): number {
@@ -43,13 +49,31 @@ export class LocalBody {
 	}
 
 	/** Advance in fixed ticks however long the frame was; the simulation never depends on fps. */
-	step(intent: Intent, dtMs: number): void {
+	step(intent: Intent, dtMs: number, nowMs = performance.now()): void {
 		this.accumulator = Math.min(this.accumulator + dtMs, TICK_MS * 5);
 		const solid = collisionWorld(this.world);
 		while (this.accumulator >= TICK_MS) {
 			this.accumulator -= TICK_MS;
+			this.previous.x = this.body.x;
+			this.previous.y = this.body.y;
+			this.previous.z = this.body.z;
 			moveBody(solid, this.body, intent, 1);
+			this.steppedAt = nowMs - this.accumulator;
 		}
+	}
+
+	/**
+	 * Where to draw the camera this frame: between the last two simulated positions.
+	 * Without this the view advances in 20 Hz chunks even at 60 fps, which reads as
+	 * teleporting forward on WASD while mouse look stays smooth.
+	 */
+	sample(nowMs: number): { x: number; y: number; z: number } {
+		const alpha = Math.max(0, Math.min(1, (nowMs - this.steppedAt) / TICK_MS));
+		return {
+			x: this.previous.x + (this.body.x - this.previous.x) * alpha,
+			y: this.previous.y + (this.body.y - this.previous.y) * alpha,
+			z: this.previous.z + (this.body.z - this.previous.z) * alpha,
+		};
 	}
 
 	/**
