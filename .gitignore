@@ -7,3 +7,11 @@ captures/
 # path; mapper is WIP until its owner declares it ready).
 viewer/
 mapper/
+# Agent-lane bookkeeping: working state, not judge-facing content.
+HANDOFF.md
+.agents/
+tasks/
+docs/STATE.md
+docs/CHANGELOG.md
+docs/compaction/
+docs/WALL-CHECKLIST.html
