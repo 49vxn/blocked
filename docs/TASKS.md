@@ -1,5 +1,12 @@
 # Task board
 
+> **Saturday reality (20:30 NZ):** the submission is the **spawn world** — the published play link.
+> This engine is the dev/insurance build, and it is in good shape: campus ported from the spawn
+> world (`scripts/port-spawn-world.ts`), pointer-lock fallback in, MAP.md aligned to the port,
+> gates green (42 tests, verify 10/10). Still on this repo: the tunnel (S2) as a fallback link and
+> the insurance video take (~22:15 tonight). The B lanes below moved to the spawn world — Savi and
+> nochills21's Savi build there now, Buffy plans (the spawn repo's PLAN.md is the one-page truth).
+
 Written before the sprint; these become GitHub issues at 11:00 Saturday. Estimates are for one
 person with an agent. "Acceptance" is the check that moves the card to Done.
 

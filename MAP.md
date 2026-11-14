@@ -1,7 +1,7 @@
 # The map: our school
 
-One arena, 64 blocks wide × 64 deep × 32 tall (`size` `[64, 32, 64]`, `[x, y, z]`). Hand-built, described as fill operations rather than a cell list, and
-materialised into a `Uint8Array` at load. Recognisable by silhouette and landmarks, not by accuracy.
+One arena, 64 blocks wide × 64 deep × 32 tall (`size` `[64, 32, 64]`, `[x, y, z]`), materialised into a `Uint8Array` at load. The campus is the spawn world's authored school: `scripts/port-spawn-world.ts` runs the
+spawn repo's `scripts/lib/campus.js` builder (the live game's source of truth) and rewrites `client/arena.json` — re-run it whenever the campus changes. Recognisable by silhouette and landmarks, not by accuracy.
 
 **One map, two modes.** The school is the game: the primary mode is **Survival** — eight players
 (bots fill empty slots) scattered across the school, no beds, last one standing wins — and the map
@@ -10,21 +10,22 @@ Nothing in the map is bedwars-specific except the two beds.
 
 ## File format: `client/arena.json`
 
-Do **not** write a 131,072-cell array. Write 50–200 fill operations; the client expands them.
+Do **not** write a 131,072-cell array. Describe the map as fill operations; the client expands them.
+(The ported campus is ~2970 fills — mesher output over the dressed builder. A hand edit stays small; a
+campus change re-runs the port script instead.)
 
 ```json
 {
   "v": 1,
   "size": [64, 32, 64],
   "fills": [
-    { "zone": "ground",  "from": [0, 0, 0],   "to": [63, 0, 63], "block": 1 },
-    { "zone": "library shell", "from": [24, 1, 24], "to": [39, 6, 39], "block": 2 },
-    { "zone": "library interior", "from": [25, 1, 25], "to": [38, 6, 38], "block": 0 },
-    { "zone": "library roof", "from": [24, 7, 24], "to": [39, 7, 39], "block": 7 },
-    { "zone": "quad",    "from": [0, 1, 44],  "to": [63, 1, 63], "block": 5 }
+    { "zone": "ground",  "from": [0, 0, 0],   "to": [63, 4, 63], "block": 1 },
+    { "zone": "hall shell", "from": [24, 5, 24], "to": [39, 12, 39], "block": 2 },
+    { "zone": "hall interior", "from": [25, 5, 25], "to": [38, 11, 38], "block": 0 },
+    { "zone": "hall roof", "from": [24, 13, 24], "to": [39, 13, 39], "block": 7 }
   ],
-  "spawns": { "red": [[8, 1, 8]], "blue": [[56, 1, 56]] },
-  "beds":   { "red": [10, 1, 8],  "blue": [54, 1, 56] }
+  "spawns": { "red": [[8, 1, 8]], "blue": [[56, 5, 56]] },
+  "beds":   { "red": [10, 1, 8],  "blue": [54, 5, 56] }
 }
 ```
 
@@ -32,14 +33,17 @@ Rules:
 
 - `from`/`to` are inclusive corners; a fill writes `block` into every cell.
 - All coordinates are `[x, y, z]`: 64 wide (x), **32 tall (y)**, 64 deep (z) — so `size` is
-  `[64, 32, 64]`. Ground is `y=0`, the library roof `y=7`. Later fills overwrite earlier ones,
-  so order matters: ground first, structures after, **interior air carves after their shell**.
-- `block`: 0 air, 1 ground, 2 wall, 3 wood, 4 glass, 5 stone, 6 bed, 7 metal, 8 water.
-  (8 is flood-only and never hand-placed. Beds are placed as block 6 **and** tracked as entities —
-  the block is what renders, `BedState` is what takes damage.)
+  `[64, 32, 64]`. The campus ground's top block is `y=4` (feet at `y=5`), the sunken No.1 field's
+  floor is `y=0`, and the library roof slab is `y=20–21` — the meteor's target. Later fills overwrite
+  earlier ones, so order matters: ground first, structures after, **interior air carves after their shell**.
+- `block`: 0 air, then an atlas id 1–34 — `client/textures/manifest.json` is the list. The core
+  eight: 1 grass, 2 brick, 3 wood, 4 glass, 5 concrete, 6 bed, 7 iron, 8 water. (8 is flood-only and
+  never hand-placed. Beds are placed as block 6 **and** tracked as entities — the block is what
+  renders, `BedState` is what takes damage.)
 - `zone` is a label only; it exists so a human can find the line to edit.
-- Spawns and beds are `[x, y, z]` cell coordinates of the **cell the player's feet occupy** — `y=1`
-  stands on the `y=0` ground, so a valid spawn has air at `y` and a solid block at `y−1`.
+- Spawns and beds are `[x, y, z]` cell coordinates of the **cell the player's feet occupy** — air at
+  `y` and `y+1`, solid at `y−1`. On the campus ground that is feet at `y=5`; in the sunken field
+  basin, `y=1`.
   The staging map is validated against exactly that rule (see `docs/VERIFY.md`).
 - Client loads it once, expands to `Uint8Array`, never rewrites it.
 - The example above omits `spawns.ffa` for brevity; the shipped `arena.json` carries the eight
@@ -49,29 +53,29 @@ Rules:
 
 ```
         N
-  +----------------+
-  |  SCIENCE       |   bases: NW (red), SE (blue)
-  |  BLOCK    []   |
-  |                |
-  |     LIBRARY    |   centre: two-storey, roof, mezzanine
-  |     ######     |
-  |                |
-  |  []      QUAD  |   open, low cover, floods first
-  +----------------+
+  +---------------------------+
+  |  No.1 FIELD (sunken)      |   floods 4:00; goals, dugouts, scoreboard
+  |                           |
+  |  TOWER    ALAN GIBBS      |   tower stair lookout, cantilevered balconies
+  |        QUAD               |   pavers, trees, benches
+  |  SCIENCE   LIBRARY  FIRTH |   quake corridors · meteor roof · assembly hall
+  |  GYM       No.3 FIELD     |   court · hedge-ringed grass
+  +---------------------------+
         S
 ```
 
 | Zone | What it offers | Threat, and when | How to play it |
 |---|---|---|---|
-| **Library** (centre) | Flat roof, tallest cover, mezzanine sightlines over the middle crossing | **Meteor 2:00** takes the roof — the best cover decays first (meteor is biased to the library, see `ENGINE.md`) | Fight here early. After 2:00 the centre is exposed; fall back and rotate |
-| **Quad** (south) | Flat and fast; benches and trees at the edges, open centre | **Flood 4:00** rises 4 blocks — movement crawls in it | Cross before 4:00. After, it is a blue killzone: go around, or accept a slow fight |
-| **Science block** (north) | Tight corridors, the quiet flank into the blue base | **Earthquake 6:00** collapses the corridors, cutting the flank | Raid through it mid-round. Leave by 6:00 — after, it strands you |
-| **Bases** (NW, SE) | Bed, spawn pad, 3-high wall, indestructible floor — **bedwars only** | Never targeted directly; the earthquake can still land here | Bedwars: hold the wall. Once a bed dies there is no respawn — the endgame is fought here |
+| **Library** (centre-south) | Flat concrete roof slab at y20–21, high cover under the tower's lookout | **Meteor 2:00** takes the roof — the best cover decays first (meteor is biased to the library, see `ENGINE.md`) | Fight here early. After 2:00 the centre is exposed; fall back and rotate |
+| **No.1 field** (north) | Sunken pitch, goals and dugouts, one way out up the west ramp | **Flood 4:00** fills the basin 4 deep, layer by layer | Cross it early or skirt the rim; after 4:00 it is a drowning trap |
+| **Quad** (centre-west) | Paved square with tree cover between tower, science and field | Floodwater stops at the terraces; it is the dry crossing between zones | The rotation hub — keep moving, use the trees |
+| **Science block** (centre-south) | Tight corridors, the quiet flank into the blue base | **Earthquake 6:00** collapses the corridors, cutting the flank | Raid through it mid-round. Leave by 6:00 — after, it strands you |
+| **Bases** (NW, SE) | Vestigial in the ported campus: bed and spawn pad only, **no walls** — bedwars only | Never targeted directly; disasters can still land here | Bedwars: the bed sits in the open — defend it or lose it. Once a bed dies there is no respawn |
 | **Middle** (library crossing) | The only fast route between bases | Every disaster reaches it eventually | The obvious fight 0:00–2:00. Whoever holds it dictates the rotation |
 
 Read it as a minute-by-minute threat map: every zone is safe until one clock strikes.
 
-## Blocks (eight) — Wellington College palette
+## Blocks — Wellington College palette
 
 The arena should read as WC: red-brick main block, cream window joinery, pale concrete tower, dark
 iron roofs, green Town Belt fields. School colours are **black and gold** — they live in the HUD,
@@ -89,10 +93,10 @@ shadow; tops and bottoms never do.
 | 2 Brick | cream mortar `#d8cfc0` courses every 4 px, bricks `#8e4a3a` ±6, offset joints, flat (no rim) | same courses, **plus a 1-px top highlight and bottom contact shadow** | same courses, tighter spread, no rim | main block, library walls |
 | 3 Wood | **end grain**: growth rings `#7a5535` at r=2 and r=5, pale ring `#b58a5e` at r=7, off-centre pith | vertical grain `#7a5535` every 2–3 px, 1-px `#b58a5e` highlight | end grain, 8% darker | desks, shelves, Firth Hall weatherboard |
 | 4 Glass | pane `#b8dbe8` at 80% alpha, 2-px cream frame `#efe6d2`, one 45° white-30% glare | pane + frame + **centre mullion at x=8** + glare | frame and a solid `#b8dbe8` back panel at 90% | cream-framed windows |
-| 5 Concrete | pale `#b9bcbe` + `#a6a9ab` speckle, joint-free (it is the slab surface) | same + horizontal joints `#9fa2a4` at y=4 and y=12 | `#b9bcbe` at 88%, sparse speckle | Tower Block, Science/Languages, the quad surface |
+| 5 Concrete | pale `#b9bcbe` + `#a6a9ab` speckle, joint-free (it is the slab surface) | same + horizontal joints `#9fa2a4` at y=4 and y=12 | `#b9bcbe` at 88%, sparse speckle | Tower Block, Science/Languages, the library roof slab, the quad surface |
 | 6 Bed (red) | wool `#b5342f`, 3-row pillow `#e8e4da` at the head, 1-px frame `#4a3a2e` | blanket over a wooden base: 5-px `#4a3a2e` plinth, plank line, centre fold | wooden underside, two plank seams | the objective (bedwars) |
 | 34 Bed (blue) | same geometry, wool `#2f5fb3` | same | same | the other team's objective |
-| 7 Iron | welded sheet: `#4a5055` rim, `#383d42` field, seams `#2e3236` at y=5 and y=10 | 1-px corrugation alternating `#383d42` / `#26292d`, top highlight `#4a5055` | `#26292d` with two `#2e3236` seams | the library roof, base floor |
+| 7 Iron | welded sheet: `#4a5055` rim, `#383d42` field, seams `#2e3236` at y=5 and y=10 | 1-px corrugation alternating `#383d42` / `#26292d`, top highlight `#4a5055` | `#26292d` with two `#2e3236` seams | metal roofs, Gibbs and tower upper walls |
 | 8 Water | surface: 2-px `#a8d4ee` line at the top, `#5a8fd6` wave dashes on a 70%-alpha `#3f76c9` body | body only, 8% darker below y=9, no surface line | body at 80%, 70% alpha | the flood |
 
 ### Atlas layout (`client/textures/atlas.png`, 544×48)
@@ -110,20 +114,20 @@ UVs for atlas cell `(col, row)`, with the texture's default `flipY`:
 `u0 = col/34`, `u1 = (col+1)/34`, `v0 = 1 − (row+1)/3`, `v1 = 1 − row/3`. The local corner order is
 unchanged, so one UV rewrite on the chunk geometry selects the face and nothing else moves.
 
-**Eight shipped ids, 34 available.** The map and protocol only need ids 1–8: the arena as built uses
-1–7 plus disaster water 8. The atlas also carries 26 extra tiles (ids 9–34: stone, plaster, slate
-roofs, doors, pavers, hedge, steel, tinted glazing, carpet, shelves, court, turf, gravel, blackboard,
-terracotta, brick variants, and the blue bed). `block` is a `uint8` in the snapshot, so using them is
-a **data** change in `arena.json`, not a protocol change — B may dress a zone with them, but nothing
-in the gate depends on it.
+**34 ids in the atlas, 31 in use.** The hand-built map needed only ids 1–8; the ported campus dresses
+with most of the atlas. The three spares: 8 water (flood-only, never hand-placed), 16 door and
+27 turf, which the campus doesn't place. `block` is a `uint8` in the snapshot, so dressing is a
+**data** change in `arena.json`, not a protocol change — and nothing in the gate depends on which
+ids a zone wears.
 
 No CDN, no licensing, no downloads. An optional moodboard may exist at
 `docs/reference-block-textures.png` — if it is missing, **the per-face recipes above and the
 pre-built atlas are the spec**. The atlas and `manifest.json` are pre-built assets (decision #37),
 copied in at kickoff; the fallback is to draw flat colours from the block ids.
 
-One destructibility nuance: block 7 is player-indestructible (base floor), but **disasters delete
-every block, including the iron roof** — that is the meteor beat.
+One destructibility nuance: **every map block is player-indestructible** — players can only break
+blocks they placed (the server answers `break` on map cells with `indestructible`) — but **disasters
+delete every block**, including the library roof slab. That is the meteor beat.
 
 ## Spawns
 
@@ -131,14 +135,19 @@ every block, including the iron roof** — that is the meteor beat.
 
 - **Survival (primary):** `spawns.ffa` — eight scattered points, one per seat, every pair at least
   12 blocks apart in `x`/`z` so nobody starts in a fight. Same rule as everything else: air at `y`
-  and `y + 1` (head room), solid at `y − 1`. Validated in the shipped `arena.json`:
+  and `y + 1` (head room), solid at `y − 1`. Validated in the shipped `arena.json` — the campus's own
+  ring, most built-up seats first so the verify place test finds a face in reach, the open field
+  basin last:
 
-  `[8,1,18]` `[24,1,20]` `[43,1,20]` `[33,1,44]` `[8,1,46]` `[56,1,46]` `[33,1,58]` `[56,1,2]`
+  `[14,5,45]` science hall · `[35,5,45]` library · `[24,5,52]` the walk by the science south face ·
+  `[51,5,41]` Firth Hall · `[52,5,57]` No.3 field · `[22,1,8]` the sunken field · `[20,5,24]` the
+  terraces top · `[13,5,57]` the gym
 
-  (Two on each flank of the campus, two behind the science block, and two on the quad — the quad
-  is the first zone to flood, so a quarter of the seats start where the water is going.)
-- **Bedwars (secondary):** `spawns.red = [[8, 1, 8]]`, `spawns.blue = [[56, 1, 56]]`, beds at
-  `[10, 1, 8]` and `[54, 1, 56]`, walls facing centre.
+  One nudge from the live ring: `[26,5,46] → [24,5,52]` — the live world never enforced the
+  12-block spacing rule, the judge gate does.
+- **Bedwars (secondary):** `spawns.red = [[8, 1, 8]]` (field basin), `spawns.blue = [[56, 5, 56]]`
+  (No.3 field), beds at `[10, 1, 8]` and `[54, 5, 56]`. The ported campus has no base walls — the
+  bases are vestigial; survival is the product and bedwars is the cut-candidate mode.
 - Spawn kit: sword, 32 wood. Survival adds **3 respawns' worth of nothing** — there are no
   respawns, so the kit is what you have. No inventory, no crafting.
 
@@ -151,9 +160,10 @@ every block, including the iron roof** — that is the meteor beat.
 
 ## Building the map in 2 hours
 
-> **The arena already exists.** `client/arena.json` is a pre-built asset (decision #37): 229 fills,
-> size `[64, 32, 64]`, shell + carved interiors, validated spawns and beds. The steps below are the
-> **fallback** if that file fails QA — do not author the map from scratch by default.
+> **The arena already exists.** `client/arena.json` is ported from the spawn world's campus
+> (decision #37's pre-built asset, superseded by the port): ~2970 fills, size `[64, 32, 64]`,
+> validated spawns and beds. The steps below are the **fallback** if the port script fails —
+> do not author the map from scratch by default.
 
 1. Heightmap: flat 64×64 at `y=0`, walls at the border.
 2. Library box: 16×16 footprint, 8 high, roof slab at y=7, two shelf rows.
