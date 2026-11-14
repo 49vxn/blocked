@@ -17,6 +17,7 @@ import { EYE_HEIGHT } from "../shared/constants";
 import { buildWorld } from "./engine/arena";
 import { raycast } from "./engine/raycast";
 import { LocalBody, RemotePlayers } from "./net";
+import { lockHint, nextLockState, type LockEvent, type LockState } from "./pointer-lock";
 import { createVoxelRenderer, type VoxelRenderer } from "./render";
 
 const canvas = document.getElementById("c") as HTMLCanvasElement;
@@ -209,11 +210,29 @@ function resize(): void {
 }
 addEventListener("resize", resize);
 
+// Pointer lock: some managed laptops and hardened browsers refuse it. Break/place already
+// work unlocked (the crosshair is fixed at the view centre), so a refusal must not leave
+// the player unable to look — client/pointer-lock.ts tracks when to stop asking and keep
+// turning the camera from plain mousemove movementX/Y instead, with a hint on the status line.
+let lockState: LockState = "idle";
+let lockHintText = "";
+function applyLockEvent(event: LockEvent): void {
+	lockState = nextLockState(lockState, event);
+	lockHintText = lockHint(lockState);
+}
+document.addEventListener("pointerlockchange", () => {
+	applyLockEvent(document.pointerLockElement === canvas ? "acquired" : "released");
+});
+document.addEventListener("pointerlockerror", () => applyLockEvent("error"));
+
 canvas.addEventListener("click", () => {
-	if (joined && document.pointerLockElement !== canvas) canvas.requestPointerLock();
+	if (joined && lockState !== "fallback" && document.pointerLockElement !== canvas) {
+		const p = canvas.requestPointerLock() as Promise<void> | undefined;
+		if (p) p.catch(() => { /* pointerlockerror owns the failure */ });
+	}
 });
 addEventListener("mousemove", (e: MouseEvent) => {
-	if (document.pointerLockElement !== canvas) return;
+	if (document.pointerLockElement !== canvas && lockState !== "fallback") return;
 	hasLooked = true;
 	yaw -= e.movementX * 0.0022;
 	pitch = Math.max(-1.5, Math.min(1.5, pitch - e.movementY * 0.0022));
@@ -257,7 +276,7 @@ function frame(): void {
 		if (hit) highlight.position.set(hit.x + 0.5, hit.y + 0.5, hit.z + 0.5);
 
 		view.render();
-		statusEl.textContent = `${myId || "…"} · ${view.fps()} fps · ${dt.toFixed(1)} ms${banner ? ` · ${banner}` : ""}`;
+		statusEl.textContent = `${myId || "…"} · ${view.fps()} fps · ${dt.toFixed(1)} ms${banner ? ` · ${banner}` : ""}${lockHintText ? ` · ${lockHintText}` : ""}`;
 	}
 	requestAnimationFrame(frame);
 }

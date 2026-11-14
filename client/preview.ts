@@ -4,6 +4,7 @@
  * Vite root is client/, so: `bun run dev` -> http://localhost:5173/preview.html
  */
 import { buildWorld, type Arena } from "./engine/arena";
+import { lockHint, nextLockState, type LockEvent, type LockState } from "./pointer-lock";
 import { createVoxelRenderer } from "./render";
 
 const canvas = document.getElementById("c") as HTMLCanvasElement;
@@ -26,11 +27,27 @@ addEventListener("keydown", (e: KeyboardEvent) => {
 });
 addEventListener("keyup", (e: KeyboardEvent) => keys.delete(e.code));
 
+// Same pointer-lock fallback as main.ts: this harness must stay usable on machines that
+// refuse requestPointerLock. See client/pointer-lock.ts for the state machine.
+let lockState: LockState = "idle";
+let lockHintText = "";
+function applyLockEvent(event: LockEvent): void {
+	lockState = nextLockState(lockState, event);
+	lockHintText = lockHint(lockState);
+}
+document.addEventListener("pointerlockchange", () => {
+	applyLockEvent(document.pointerLockElement === canvas ? "acquired" : "released");
+});
+document.addEventListener("pointerlockerror", () => applyLockEvent("error"));
+
 canvas.addEventListener("click", () => {
-	if (document.pointerLockElement !== canvas) canvas.requestPointerLock();
+	if (lockState !== "fallback" && document.pointerLockElement !== canvas) {
+		const p = canvas.requestPointerLock() as Promise<void> | undefined;
+		if (p) p.catch(() => { /* pointerlockerror owns the failure */ });
+	}
 });
 addEventListener("mousemove", (e: MouseEvent) => {
-	if (document.pointerLockElement !== canvas) return;
+	if (document.pointerLockElement !== canvas && lockState !== "fallback") return;
 	yaw -= e.movementX * 0.0022;
 	pitch = Math.max(-1.5, Math.min(1.5, pitch - e.movementY * 0.0022));
 });
@@ -61,7 +78,7 @@ function frame(): void {
 	camera.rotation.set(pitch, yaw, 0, "YXZ");
 
 	view.render();
-	hud.textContent = `${view.fps()} fps · ${world.sx}x${world.sy}x${world.sz} · ${arena.fills.length} fills · ${view.renderer.info.render.triangles} tris · ${view.renderer.info.render.calls} calls`;
+	hud.textContent = `${view.fps()} fps · ${world.sx}x${world.sy}x${world.sz} · ${arena.fills.length} fills · ${view.renderer.info.render.triangles} tris · ${view.renderer.info.render.calls} calls${lockHintText ? ` · ${lockHintText}` : ""}`;
 	requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
